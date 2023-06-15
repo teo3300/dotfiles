@@ -45,9 +45,8 @@ include $HOME/.config/sway/config.d/*
     # Set keyboard layouts to cycle through
     input type:keyboard {
         xkb_layout us
-        # Use caps as an escape
-        xkb_options caps:escape
-        xkb_options compose:ralt
+        # Use caps as an escape and right alt as compose key
+        xkb_options caps:escape,compose:ralt
     }
 
     input type:touchpad {
