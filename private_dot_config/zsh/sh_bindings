@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+# Add any useful keybinding
+
+## eg:
+## bindkey -s '^F' "find . -name "
