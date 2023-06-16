@@ -24,7 +24,6 @@ configs are separated into 3 files:
 After a first setup, this file will only write =packages.el= and =config.el=
 
 ** Importing original files header
-*** =init.el=
 #+html: <details><summary>init.el</summary>
 #+begin_src emacs-lisp :tangle init.el
 ;;; init.el -*- lexical-binding: t; -*-
@@ -45,8 +44,7 @@ After a first setup, this file will only write =packages.el= and =config.el=
 
 #+end_src
 #+html: </details>
-*** =packages.el=
-#+html: <details><summary>init.el</summary>
+#+html: <details><summary>packages.el</summary>
 #+begin_src emacs-lisp :tangle packages.el
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
@@ -100,11 +98,8 @@ After a first setup, this file will only write =packages.el= and =config.el=
 ;(unpin! t)
 #+end_src
 
-#+RESULTS:
-
 #+html: </details>
-*** =config.el=
-#+html: <details><summary>init.el</summary>
+#+html: <details><summary>config.el</summary>
 #+begin_src emacs-lisp :tangle config.el
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
@@ -211,7 +206,7 @@ Load default modules found inside =init.el=, this also comes unchanged from the 
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        ;;indent-guides     ; highlighted indent columns
-       ;;ligatures         ; ligatures and symbols to make your code pretty again
+       ligatures ; enabled        ; ligatures and symbols to make your code pretty again
        ;;minimap           ; show a map of the code on the side
        modeline          ; snazzy, Atom-inspired modeline, plus API
        ;;nav-flash         ; blink cursor line after big motions
@@ -220,7 +215,7 @@ Load default modules found inside =init.el=, this also comes unchanged from the 
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
        ;;tabs              ; a tab bar for Emacs
        ;;treemacs          ; a project drawer, like neotree but cooler
-       ;;unicode           ; extended unicode support for various languages
+       unicode ; enabled          ; extended unicode support for various languages
        (vc-gutter +pretty) ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        ;;window-select     ; visually switch windows
@@ -231,7 +226,7 @@ Load default modules found inside =init.el=, this also comes unchanged from the 
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       ;;(format +onsave)  ; automated prettiness
+       (format +onsave) ; enabled  ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
        ;;multiple-cursors  ; editing in many places at once
@@ -252,7 +247,7 @@ Load default modules found inside =init.el=, this also comes unchanged from the 
        ;;eshell            ; the elisp shell that works everywhere
        ;;shell             ; simple shell REPL for Emacs
        ;;term              ; basic terminal emulator for Emacs
-       ;;vterm             ; the best terminal emulation in Emacs
+       vterm ; enabled             ; the best terminal emulation in Emacs
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
@@ -279,7 +274,7 @@ Load default modules found inside =init.el=, this also comes unchanged from the 
        ;;rgb               ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects
        ;;terraform         ; infrastructure as code
-       ;;tmux              ; an API for interacting with tmux
+       tmux ; enabled             ; an API for interacting with tmux
        ;;tree-sitter       ; syntax and parsing, sitting in a tree...
        ;;upload            ; map local to remote projects via ssh/ftp
 
@@ -339,7 +334,7 @@ Load default modules found inside =init.el=, this also comes unchanged from the 
        ;;rest              ; Emacs as a REST client
        ;;rst               ; ReST in peace
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       ;;(rust +lsp)       ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       (rust +lsp) ; enabled       ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;(scheme +guile)   ; a fully conniving family of lisps
        sh                ; she sells {ba,z,fi}sh shells on the C xor
@@ -408,7 +403,7 @@ And make absolutely sure that it is evaluated, even if this file gets compiled (
 
 Setup Company for coding suggestion
 
-#+begin_src emacs-lisp :tangle packages.el
+#+begin_src emacs-lisp :tangle no
   (package! company)
 #+end_src
 
@@ -430,7 +425,7 @@ Also set commands to select and confirm suggestion
 ** YASnippet
 Install YASnippet to define custom snippets (mostly emacs-lisp block)
 
-#+begin_src emacs-lisp :tangle packages.el
+#+begin_src emacs-lisp :tangle no
   (package! yasnippet)
 #+end_src
 
@@ -441,9 +436,9 @@ Install YASnippet to define custom snippets (mostly emacs-lisp block)
     (add-hook 'prog-mode-hook 'yas-minor-mode)
     (add-hook 'text-mode-hook 'yas-minor-mode))
 #+end_src
-** Other funny config for company and YASnippet
+** Other funny config for company and YASnippet :DISABLED:
 
-#+begin_src emacs-lisp :tangle config.el
+#+begin_src emacs-lisp :tangle no
   (defun company-yasnippet-or-completion ()
     (interactive)
     (or (do-yas-expand)
@@ -472,17 +467,17 @@ Install YASnippet to define custom snippets (mostly emacs-lisp block)
             (indent-for-tab-command)))))
 #+end_src
 ** Programming support
-*** lsp-mode
+*** lsp-mode :DISABLED:
 
 Setup lsp-mode, for now only used to work with rust-analyzer
 
-#+begin_src emacs-lisp :tangle packages.el
+#+begin_src emacs-lisp :tangle no
   (package! lsp-mode)
 #+end_src
 
 Run clippy on save
 
-#+begin_src emacs-lisp :tangle config.el
+#+begin_src emacs-lisp :tangle no
   (use-package lsp-mode
     :commands lsp
     :custom
@@ -503,15 +498,15 @@ Run clippy on save
     :config
       (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 #+end_src
-*** lsp-ui
+*** lsp-ui :DISABLED:
 
 Shows interpretation of every line and types on the side
 
-#+begin_src emacs-lisp :tangle packages.el
+#+begin_src emacs-lisp :tangle no
   (package! lsp-ui)
 #+end_src
 
-#+begin_src emacs-lisp :tangle config.el
+#+begin_src emacs-lisp :tangle no
   (use-package lsp-ui
     :commands lsp-ui-mode
     :custom
@@ -530,18 +525,20 @@ Underline errors and show error message when hover
 #+begin_src emacs-lisp :tangle config.el
   (use-package flycheck)
 #+end_src
-*** rust
+*** rust :DISABLED:
+Following Krahn's [[https://github.com/rksm/emacs-rust-config][emacs-rust-config]]
+
 **** rustic
 
 Install package
 
-#+begin_src emacs-lisp :tangle packages.el
+#+begin_src emacs-lisp :tangle no
   (package! rustic)
 #+end_src
 
 And set basic keybinding
 
-#+begin_src emacs-lisp :tangle config.el
+#+begin_src emacs-lisp :tangle no
   (use-package rustic
       :bind (:map rustic-mode-map
                 ("M-j" . lsp-ui-imenu)
@@ -564,11 +561,15 @@ And set basic keybinding
     ;; comment to disable rustfmt on save
     (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
 #+end_src
+
+#+RESULTS:
+: lsp-ui-doc-glance
+
 **** rustic-mode-hook
 
 Add hook to rustic-mode to auto save on exit, visit [[https://github.com/brotzeit/rustic/issues/253][the relative issue]] to know more
 
-#+begin_src emacs-lisp :tangle config.el
+#+begin_src emacs-lisp :tangle no
   (defun rk/rustic-mode-hook ()
     ;; so that run C-c C-c C-r works without having to confirm, but don't try to
     ;; save rust buffers that are not file visiting. Once
@@ -583,15 +584,14 @@ Add hook to rustic-mode to auto save on exit, visit [[https://github.com/brotzei
 
 For rust scratch projects
 
-#+begin_src emacs-lisp :tangle packages.el
+#+begin_src emacs-lisp :tangle no
   (package! rust-playground)
 #+end_src
 
-#+begin_src emacs-lisp :tangle config.el
+#+begin_src emacs-lisp :tangle no
   (use-package rust-playground)
 #+end_src
 * Modes
-
 Ensure certain modes are installed
 ** toml-mode
 #+begin_src emacs-lisp :tangle packages.el
@@ -601,6 +601,12 @@ Ensure certain modes are installed
 
 #+begin_src emacs-lisp :tangle packages.el
   (package! rust-mode)
+#+end_src
+** dap-mode
+Used to debug rust code
+
+#+begin_src emacs-lisp :tangle packages.el
+  (package! dap-mode)
 #+end_src
 * Custom config
 ** Relative line numbers
