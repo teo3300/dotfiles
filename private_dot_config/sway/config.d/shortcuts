@@ -15,7 +15,7 @@
     bindsym $mod+p exec emacsclient -c -a 'emacs'
     bindsym $mod+Shift+p exec $term emacsclient -nw -c -a 'emacs'
     ### Open the default agenda
-    bindsym $mod+Shift+a exec $term emacsclient -c -a 'emacs' $emacs_agenda
+    bindsym $mod+Shift+a exec emacsclient -c -a 'emacs' $emacs_agenda
 
     ### Toggle trackpad
     bindsym $mod+space exec $touchpad_toggle
