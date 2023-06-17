@@ -15,7 +15,7 @@
     set $mic_toggle         wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
     ### Screenshots
-    set $save_fullscreen    grim "$HOME/Pictures/Screenshots/$($lbin/get_focused)-$(date +%F_%H%M%S_%3N).png"
+    set $save_fullscreen    grim "$HOME/Pictures/screenshots/$($lbin/get_focused)-$(date +%F_%H%M%S_%3N).png"
     set $clip_screen_sel    grim -g "$(slurp)" - | wl-copy
 
     ### Lock scree

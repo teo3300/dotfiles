@@ -189,7 +189,7 @@ To osetup doom emacs using this org file:
 ;; - `after!' for running code after a package has loaded
 ;; - `add-load-path!' for adding directories to the `load-path', relative to
 ;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
+;;   `require' or `use-package!'.
 ;; - `map!' for binding new keys
 ;;
 ;; To get information about any of these functions/macros, move the cursor over
@@ -406,7 +406,7 @@ Once the early package management configuration is done, load and activate packa
 #+end_src
 
 ** use-package
-Ensure that [[https://github.com/jwiegley/use-package][use-package]] is installed.
+Ensure that [[https://github.com/jwiegley/use-package!][use-package]] is installed.
 
 #+begin_src emacs-lisp :tangle packages.el
   (unless (package-installed-p 'use-package)
@@ -433,16 +433,17 @@ Setup Company for coding suggestion
 Also set commands to select and confirm suggestion
 
 #+begin_src emacs-lisp :tangle config.el
-  (use-package company
-  :bind
-  (:map company-active-map
-              ("C-n". company-select-next)
-              ("C-p". company-select-previous)
-              ("M-<". company-select-first)
-              ("M->". company-select-last))
-  (:map company-mode-map
-        ("<tab>". tab-indent-or-complete)
-        ("TAB". tab-indent-or-complete)))
+  (use-package! company
+    :ensure
+    :bind
+    (:map company-active-map
+                ("C-n". company-select-next)
+                ("C-p". company-select-previous)
+                ("M-<". company-select-first)
+                ("M->". company-select-last))
+    (:map company-mode-map
+          ("<tab>". tab-indent-or-complete)
+          ("TAB". tab-indent-or-complete)))
 #+end_src
 
 ** YASnippet
@@ -453,11 +454,12 @@ Install YASnippet to define custom snippets (mostly emacs-lisp block)
 #+end_src
 
 #+begin_src emacs-lisp :tangle config.el
-  (use-package yasnippet
+  (use-package! yasnippet
+      :ensure
       :config
-    (yas-reload-all)
-    (add-hook 'prog-mode-hook 'yas-minor-mode)
-    (add-hook 'text-mode-hook 'yas-minor-mode))
+      (yas-reload-all)
+      (add-hook 'prog-mode-hook 'yas-minor-mode)
+      (add-hook 'text-mode-hook 'yas-minor-mode))
 #+end_src
 ** Other funny config for company and YASnippet
 
@@ -502,7 +504,8 @@ Setup lsp-mode, for now only used to work with rust-analyzer
 Run clippy on save
 
 #+begin_src emacs-lisp :tangle config.el
-  (use-package lsp-mode
+  (use-package! lsp-mode
+    :ensure
     :commands lsp
     :custom
     ;; what to use when checking on-save. "check" is default, I prefer clippy
@@ -531,7 +534,8 @@ Shows interpretation of every line and types on the side
 #+end_src
 
 #+begin_src emacs-lisp :tangle config.el
-  (use-package lsp-ui
+  (use-package! lsp-ui
+    :ensure
     :commands lsp-ui-mode
     :custom
     (lsp-ui-peek-always-show t)
@@ -547,7 +551,7 @@ Underline errors and show error message when hover
 #+end_src
 
 #+begin_src emacs-lisp :tangle config.el
-  (use-package flycheck)
+  (use-package! flycheck :ensure)
 #+end_src
 *** rust
 Following Krahn's [[https://github.com/rksm/emacs-rust-config][emacs-rust-config]]
@@ -563,7 +567,8 @@ Install package
 And set basic keybinding
 
 #+begin_src emacs-lisp :tangle config.el
-  (use-package rustic
+  (use-package! rustic
+      :ensure
       :bind (:map rustic-mode-map
                 ("M-j" . lsp-ui-imenu)
                 ("M-?" . lsp-find-references)
@@ -585,11 +590,12 @@ And set basic keybinding
     ;; comment to disable rustfmt on save
     (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
 #+end_src
+
 **** rustic-mode-hook
 
 Add hook to rustic-mode to auto save on exit, visit [[https://github.com/brotzeit/rustic/issues/253][the relative issue]] to know more
 
-#+begin_src emacs-lisp :tangle conifig.el
+#+begin_src emacs-lisp :tangle config.el
   (defun rk/rustic-mode-hook ()
     ;; so that run C-c C-c C-r works without having to confirm, but don't try to
     ;; save rust buffers that are not file visiting. Once
@@ -694,6 +700,15 @@ open vterm buffer with =C-c v=
   (define-key global-map "\C-cv" 'vterm)
 #+end_src
 
+*** Quick eldoc-buffer
+
+Enable eldoc-buffer as a separated buffer (mostly used to program in rust)
+
+#+begin_src emacs-lisp :tangle config.el
+  (define-key
+    rust-mode-map ; For now only enables it in rust mode, since I'm not using it outside of rust
+    "\C-ce" 'eldoc-doc-buffer)
+#+end_src
 ** Org agenda directory
 
 Set the path for the org-agenda files
