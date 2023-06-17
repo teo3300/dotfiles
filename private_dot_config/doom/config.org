@@ -15,7 +15,7 @@
 #+author: Matteo Rogora
 
 * Overview
-Following zamboni's [[https://gitlab.com/zzamboni/dot-doom/-/blob/master/doom.org#doom-config-file-overview][Doom emacs config]]
+Following zamboni's [[https://github.com/zzamboni/dot-doom/blob/master/doom.org][Doom org config]]
 configs are separated into 3 files:
 - =init.el=: Doom modules to load
 - =packages.el=: Packages to install
@@ -357,7 +357,7 @@ Load default modules found inside =init.el=, this also comes unchanged from the 
        ;;rest              ; Emacs as a REST client
        ;;rst               ; ReST in peace
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       (rust +lsp) ; enabled       ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       ;;(rust +lsp)       ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;(scheme +guile)   ; a fully conniving family of lisps
        sh                ; she sells {ba,z,fi}sh shells on the C xor
@@ -448,7 +448,7 @@ Also set commands to select and confirm suggestion
 ** YASnippet
 Install YASnippet to define custom snippets (mostly emacs-lisp block)
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle packages.el
   (package! yasnippet)
 #+end_src
 
@@ -489,18 +489,19 @@ Install YASnippet to define custom snippets (mostly emacs-lisp block)
               (company-complete-common)
             (indent-for-tab-command)))))
 #+end_src
-*** Programming support
-*** lsp-mode :DISABLED:
+
+** Programming support
+*** lsp-mode
 
 Setup lsp-mode, for now only used to work with rust-analyzer
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle packages.el
   (package! lsp-mode)
 #+end_src
 
 Run clippy on save
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle config.el
   (use-package lsp-mode
     :commands lsp
     :custom
@@ -521,15 +522,15 @@ Run clippy on save
     :config
       (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 #+end_src
-*** lsp-ui :DISABLED:
+*** lsp-ui
 
 Shows interpretation of every line and types on the side
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle packages.el
   (package! lsp-ui)
 #+end_src
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle config.el
   (use-package lsp-ui
     :commands lsp-ui-mode
     :custom
@@ -548,20 +549,20 @@ Underline errors and show error message when hover
 #+begin_src emacs-lisp :tangle config.el
   (use-package flycheck)
 #+end_src
-*** rust :DISABLED:
+*** rust
 Following Krahn's [[https://github.com/rksm/emacs-rust-config][emacs-rust-config]]
 
 **** rustic
 
 Install package
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle packages.el
   (package! rustic)
 #+end_src
 
 And set basic keybinding
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle config.el
   (use-package rustic
       :bind (:map rustic-mode-map
                 ("M-j" . lsp-ui-imenu)
@@ -584,15 +585,11 @@ And set basic keybinding
     ;; comment to disable rustfmt on save
     (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
 #+end_src
-
-#+RESULTS:
-: lsp-ui-doc-glance
-
 **** rustic-mode-hook
 
 Add hook to rustic-mode to auto save on exit, visit [[https://github.com/brotzeit/rustic/issues/253][the relative issue]] to know more
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle conifig.el
   (defun rk/rustic-mode-hook ()
     ;; so that run C-c C-c C-r works without having to confirm, but don't try to
     ;; save rust buffers that are not file visiting. Once
@@ -603,17 +600,6 @@ Add hook to rustic-mode to auto save on exit, visit [[https://github.com/brotzei
     (add-hook 'before-save-hook 'lsp-format-buffer nil t))
 #+end_src
 
-**** rust-playground
-
-For rust scratch projects
-
-#+begin_src emacs-lisp :tangle no
-  (package! rust-playground)
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-  (use-package rust-playground)
-#+end_src
 * Modes
 Ensure certain modes are installed
 ** toml-mode
@@ -658,22 +644,47 @@ Set YASnippet to autosuggest code block for emacs
 
 ** Keybinding
 *** org-agenda
+**** Quick open agenda-view menu
 
-Quick agenda opening with =C-c a=
+Quick agenda-view opening with =C-c a=
 
 #+begin_src emacs-lisp :tangle config.el
   (define-key global-map "\C-ca" 'org-agenda)
 #+end_src
+**** Open org-agenda main file
+
+The main file is an org file named =<current_year>.org=, inside the =~/org/agenda/=
+
+#+begin_src emacs-lisp :tangle config.el
+  (defun org-agenda-file-current ()
+      "Open the current agenda file <year>.org"
+      (interactive)
+      (find-file (concat
+                  "~/org/agenda/"
+                  (format-time-string "%Y")
+                  ".org")))
+#+end_src
+
+Add a keybinding to quickly open it with =C-c s=, mnemonically it sucks, but =s= is close to =a= on the keyboard
+
+#+begin_src emacs-lisp :tangle config.el
+  (define-key global-map "\C-cs" 'org-agenda-file-current)
+#+end_src
 *** emacs config
+
+Define the function to open config file, just to have its name appear into doom menu
+
+#+begin_src emacs-lisp :tangle config.el
+  (defun org-config ()
+    "Open the default org config file"
+    (interactive)
+    (find-file "~/.config/doom/config.org"))
+#+end_src
 
 Open doom =config.org= (this file) with =C-c c=
 
 #+begin_src emacs-lisp :tangle config.el
-  (define-key global-map "\C-cc"
-    '(lambda()
-      "Open the default org config file"
-      (interactive)
-      (find-file "~/.config/doom/config.org")))
+  (define-key global-map "\C-cc" 'org-config)
 #+end_src
 *** vterm
 
@@ -689,6 +700,5 @@ Set the path for the org-agenda files
 
 #+begin_src emacs-lisp :tangle config.el
   (setq
-    org-agenda-files
-    (file-expand-wildcards "~/org/agenda/"))
+    org-agenda-files '("~/org/agenda"))
 #+end_src
