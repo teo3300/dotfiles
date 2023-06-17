@@ -237,7 +237,7 @@ Load default modules found inside =init.el=, this also comes unchanged from the 
        ophints           ; highlight the region an operation acts on
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
        ;;tabs              ; a tab bar for Emacs
-       ;;treemacs          ; a project drawer, like neotree but cooler
+       treemacs ; enabled          ; a project drawer, like neotree but cooler
        unicode ; enabled          ; extended unicode support for various languages
        (vc-gutter +pretty) ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
@@ -492,6 +492,25 @@ Install YASnippet to define custom snippets (mostly emacs-lisp block)
             (indent-for-tab-command)))))
 #+end_src
 
+** Treemacs
+
+Because I like browsing folders
+
+#+begin_src emacs-lisp :tangle config.el
+  (use-package! treemacs
+    :ensure
+    :bind
+    (:map global-map
+          ;; be carefull as these will be applied globally and may be
+          ;; conflicting with other shortcuts in the future
+          ("C-c C-c t" . treemacs)
+          ("C-c t" . treemacs-select-window))
+    :config
+    ;; Prevent treemacs from being considered as a different window
+    ;; can be annoying when cycling between windows (eg: eldoc-buffer)
+    (setq treemacs-is-never-other-window t))
+#+end_src
+
 ** Programming support
 *** lsp-mode
 
@@ -580,7 +599,9 @@ And set basic keybinding
                 ("C-c C-c s" . lsp-rust-analyzer-status)
                 ("C-c C-c e" . lsp-rust-analyzer-expand-macro)
                 ("C-c C-c d" . dap-hydra)
-                ("C-c C-c h" . lsp-ui-doc-glance))
+                ("C-c C-c h" . lsp-ui-doc-glance)
+                ;; Quickly open eldoc-doc-buffer while in rustic mode, by putting this here preventsconflicts
+                ("C-c C-c d" . eldoc-doc-buffer))
     :config
     ;; uncomment for less flashiness
     ;; (setq lsp-eldoc-hook nil)
@@ -632,8 +653,7 @@ I use relative line numbers since they are much easier to work with when doing c
   (global-display-line-numbers-mode)
 #+end_src
 
-** Visual config
-*** JetBrainsMono Nerd Font
+** JetBrainsMono Nerd Font
 This is the font I use system-wide, use it in emacs too to make everything coherent
 
 #+begin_src emacs-lisp :tangle config.el
@@ -642,6 +662,8 @@ This is the font I use system-wide, use it in emacs too to make everything coher
 ** Custom snippets
 *** code_block emacs-lisp
 Set YASnippet to autosuggest code block for emacs
+
+I will keep this snippet here, I *do NOT* want to rewrite this org file without it :)
 
 #+begin_src emacs-lisp :tangle config.el
   (yas-define-snippets 'org-mode
@@ -700,15 +722,6 @@ open vterm buffer with =C-c v=
   (define-key global-map "\C-cv" 'vterm)
 #+end_src
 
-*** Quick eldoc-buffer
-
-Enable eldoc-buffer as a separated buffer (mostly used to program in rust)
-
-#+begin_src emacs-lisp :tangle config.el
-  (define-key
-    rust-mode-map ; For now only enables it in rust mode, since I'm not using it outside of rust
-    "\C-ce" 'eldoc-doc-buffer)
-#+end_src
 ** Org agenda directory
 
 Set the path for the org-agenda files
