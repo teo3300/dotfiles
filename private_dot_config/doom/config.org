@@ -503,8 +503,8 @@ Because I like browsing folders
     (:map global-map
           ;; be carefull as these will be applied globally and may be
           ;; conflicting with other shortcuts in the future
-          ("C-c C-c t" . treemacs)
-          ("C-c t" . treemacs-select-window))
+          ("C-c C-r" . treemacs)
+          ("C-c r" . treemacs-select-window))
     :config
     ;; Prevent treemacs from being considered as a different window
     ;; can be annoying when cycling between windows (eg: eldoc-buffer)
@@ -681,14 +681,14 @@ Quick agenda-view opening with =C-c a=
 #+end_src
 **** Open org-agenda main file
 
-The main file is an org file named =<current_year>.org=, inside the =~/org/agenda/=
+The main file is an org file named =<current_year>.org=, inside the =~/Nextcloud/org-agenda/=
 
 #+begin_src emacs-lisp :tangle config.el
   (defun org-agenda-file-current ()
       "Open the current agenda file <year>.org"
       (interactive)
       (find-file (concat
-                  "~/org/agenda/"
+                  "~/Nextcloud/org-agenda/"
                   (format-time-string "%Y")
                   ".org")))
 #+end_src
@@ -728,5 +728,5 @@ Set the path for the org-agenda files
 
 #+begin_src emacs-lisp :tangle config.el
   (setq
-    org-agenda-files '("~/org/agenda"))
+    org-agenda-files '("~/Nextcloud/org-agenda"))
 #+end_src
