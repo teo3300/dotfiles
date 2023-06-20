@@ -38,6 +38,7 @@ include $HOME/.config/sway/config.d/*
 
     ### Launch notification manager
     exec dunst
+    exec waybar
 
 ###
 ### Configure input

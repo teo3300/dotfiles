@@ -18,7 +18,7 @@
     bindsym $mod+Shift+a exec emacsclient -c -a 'emacs' $emacs_agenda
 
     ### Toggle trackpad
-    bindsym $mod+space exec $touchpad_toggle
+    bindsym $mod+Shift+t exec $touchpad_toggle
 
     ### Drag floating windows by holding down $mod and left mouse button.
     ### Resize them with right mouse button + $mod.

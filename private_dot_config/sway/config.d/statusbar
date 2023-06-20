@@ -26,7 +26,8 @@ bar {
   	    urgent_workspace        $tx         $bg             $tx
         inactive_workspace      $bg         $bg             $tx
 
-         status_command i3status
+        ### moving to waybar
+        # status_command i3status
 
     }
 

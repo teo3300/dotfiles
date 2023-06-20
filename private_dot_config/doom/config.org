@@ -657,7 +657,12 @@ I use relative line numbers since they are much easier to work with when doing c
 This is the font I use system-wide, use it in emacs too to make everything coherent
 
 #+begin_src emacs-lisp :tangle config.el
-  (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 12))
+  (setq doom-font "JetBrainsMono Nerd Font-8")
+#+end_src
+
+#+begin_src emacs-lisp :tangle config.el
+  (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-12"))
+  (set-face-attribute 'default t :font "JetBrainsMono Nerd Font-12")
 #+end_src
 ** Custom snippets
 *** code_block emacs-lisp
@@ -681,14 +686,14 @@ Quick agenda-view opening with =C-c a=
 #+end_src
 **** Open org-agenda main file
 
-The main file is an org file named =<current_year>.org=, inside the =~/Nextcloud/org-agenda/=
+The main file is an org file named =<current_year>.org=, inside the =~/org/agenda/=
 
 #+begin_src emacs-lisp :tangle config.el
   (defun org-agenda-file-current ()
       "Open the current agenda file <year>.org"
       (interactive)
       (find-file (concat
-                  "~/Nextcloud/org-agenda/"
+                  "~/org/agenda/"
                   (format-time-string "%Y")
                   ".org")))
 #+end_src
@@ -728,5 +733,5 @@ Set the path for the org-agenda files
 
 #+begin_src emacs-lisp :tangle config.el
   (setq
-    org-agenda-files '("~/Nextcloud/org-agenda"))
+    org-agenda-files '("~/org/agenda"))
 #+end_src
