@@ -24,7 +24,7 @@ configs are separated into 3 files:
 After a first setup, this file will only write =packages.el= and =config.el=
 
 ** Working with this file
-To osetup doom emacs using this org file:
+To setup doom emacs using this org file:
 
 1. Save this file into the =~/.config/doom/= directory
    #+begin_src sh :tangle no
@@ -274,8 +274,8 @@ Load default modules found inside =init.el=, this also comes unchanged from the 
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
-       ;;(spell +flyspell) ; tasing you for misspelling mispelling
-       ;;grammar           ; tasing grammar mistake every you make
+       (spell +flyspell) ; tasing you for misspelling mispelling
+       grammar             ; tasing grammar mistake every you make
 
        :tools
        ;;ansible
@@ -333,9 +333,9 @@ Load default modules found inside =init.el=, this also comes unchanged from the 
        ;;(haskell +lsp)    ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ; a language you can depend on
-       ;;json              ; At least it ain't XML
+       json              ; At least it ain't XML
        ;;(java +lsp)       ; the poster child for carpal tunnel syndrome
-       ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
+       javascript        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        ;;latex             ; writing papers in Emacs has never been so fun
@@ -350,7 +350,7 @@ Load default modules found inside =init.el=, this also comes unchanged from the 
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       ;;python            ; beautiful is better than ugly
+       python            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6
@@ -365,9 +365,9 @@ Load default modules found inside =init.el=, this also comes unchanged from the 
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
-       ;;web               ; the tubes
-       ;;yaml              ; JSON, but readable
-       ;;zig               ; C, but simpler
+       web               ; the tubes
+       yaml              ; JSON, but readable
+       zig               ; C, but simpler
 
        :email
        ;;(mu4e +org +gmail)
@@ -443,7 +443,37 @@ Also set commands to select and confirm suggestion
                 ("M->". company-select-last))
     (:map company-mode-map
           ("<tab>". tab-indent-or-complete)
-          ("TAB". tab-indent-or-complete)))
+          ("TAB". tab-indent-or-complete))
+    :delight company-mode
+    :hook (after-init . global-company-mode) ;; Enable company-mode everywhere
+#+end_src
+
+*** More advanced settings taken from [[https://github.com/nessdoor/dotfiles/blob/master/private_dot_emacs.d/config.org#autocompletion-responsiveness][the same config]]
+
+#+begin_src emacs-lisp :tangle config.el
+    :custom
+    ;; such config, much I understand nothing
+    (company-minimum-prefix-length 2)       ;; suggestion after just 2 character
+    (company-idle-delay 0.0)                ;; no delay in company pop-up
+    (company-selection-wrap-around t)       ;; wrap around menu
+#+end_src
+
+Show numbers to quickly select entry with =M-<number>=
+
+#+begin_src emacs-lisp :tangle config.el
+    (company-show-numbers t)
+#+end_src
+
+Prevent match requirement to block input
+
+#+begin_src emacs-lisp :tangle config.el
+    (company-require-match nil)
+#+end_src
+
+Disable global autocommit, enable it on specific characters: (=.=, =)=, ="=)
+
+#+begin_src emacs-lisp :tangle config.el
+    (company-dabbrev-downcase nil))
 #+end_src
 
 ** YASnippet
@@ -458,9 +488,14 @@ Install YASnippet to define custom snippets (mostly emacs-lisp block)
       :ensure
       :config
       (yas-reload-all)
+      ;; Run yasnippet in both text and prog mode
       (add-hook 'prog-mode-hook 'yas-minor-mode)
       (add-hook 'text-mode-hook 'yas-minor-mode))
+      ;; Set snippets folder
+      (add-to-list 'yas-snippet-dirs "~/.config/doom/snippets")
+      (yas-global-mode 1)
 #+end_src
+
 ** Other funny config for company and YASnippet
 
 #+begin_src emacs-lisp :tangle config.el
@@ -490,6 +525,33 @@ Install YASnippet to define custom snippets (mostly emacs-lisp block)
           (if (check-expansion)
               (company-complete-common)
             (indent-for-tab-command)))))
+#+end_src
+
+** Hook flyspell
+
+Automatically enable flyspell
+
+#+begin_src emacs-lisp :tangle config.el
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+#+end_src
+
+** Why not use =olivetti= package?
+
+Force buffer writing width to a specified width, in either # of characters or percentage
+
+#+begin_src emacs-lisp :tangle packages.el
+  (package! olivetti)
+#+end_src
+
+#+begin_src emacs-lisp :tangle config.el
+  (use-package! olivetti
+    :ensure
+    :bind
+    (:map global-map
+          ("C-c o" . olivetti-mode))
+    :config
+    (setq olivetti-body-width 80))
 #+end_src
 
 ** Treemacs
@@ -653,24 +715,15 @@ I use relative line numbers since they are much easier to work with when doing c
   (global-display-line-numbers-mode)
 #+end_src
 
-** JetBrainsMono Nerd Font
-This is the font I use system-wide, use it in emacs too to make everything coherent
+** Custom snippets :DISABLED:
 
-#+begin_src emacs-lisp :tangle config.el
-  (setq doom-font "JetBrainsMono Nerd Font-8")
-#+end_src
+*Moved to a snippet file*
 
-#+begin_src emacs-lisp :tangle config.el
-  (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-12"))
-  (set-face-attribute 'default t :font "JetBrainsMono Nerd Font-12")
-#+end_src
-** Custom snippets
-*** code_block emacs-lisp
 Set YASnippet to autosuggest code block for emacs
 
 I will keep this snippet here, I *do NOT* want to rewrite this org file without it :)
 
-#+begin_src emacs-lisp :tangle config.el
+#+begin_src emacs-lisp :tangle no
   (yas-define-snippets 'org-mode
     '(("eml" "#+begin_src emacs-lisp :tangle $1.el\n  $2\n#+end_src" "emacs-lisp")))
 #+end_src
