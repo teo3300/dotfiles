@@ -5,9 +5,9 @@
 alias ls='ls --color=auto'
 alias rm='rm -i'
 alias ll='ls -al'
-alias vim='nvim'
-alias vi='nvim'
 alias v='nvim'
-alias emacs="emacsclient -c -a 'emacs'"
-alias em="emacsclient -c -a 'emacs'"
+alias vi='v'
+alias vim='v'
 alias e="emacsclient -c -a 'emacs'"
+alias em="e"
+alias emacs="e"
