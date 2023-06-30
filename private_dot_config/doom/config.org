@@ -387,6 +387,101 @@ Load default modules found inside =init.el=, this also comes unchanged from the 
        (default +bindings +smartparens))
 #+end_src
 
+* Custom config
+** Relative line numbers
+I use relative line numbers since they are much easier to work with when doing copy-paste in evil-mode
+
+#+begin_src emacs-lisp :tangle config.el
+  (setq display-line-numbers-type 'relative)
+  (global-display-line-numbers-mode)
+#+end_src
+
+** Global keybinding
+*** emacs config
+
+Define the function to open config file, just to have its name appear into doom menu
+
+#+begin_src emacs-lisp :tangle config.el
+  (defun org-config ()
+    "Open the default org config file"
+    (interactive)
+    (find-file "~/.config/doom/config.org"))
+#+end_src
+
+Open doom =config.org= (this file) with =C-c c=
+
+#+begin_src emacs-lisp :tangle config.el
+  (define-key global-map "\C-cc" 'org-config)
+#+end_src
+*** vterm
+
+open vterm buffer with =C-c v=
+
+#+begin_src emacs-lisp :tangle config.el
+  (define-key global-map "\C-cv" 'vterm)
+#+end_src
+
+** Org agenda
+*** Set default directory
+
+Set the path for the org-agenda files
+
+#+begin_src emacs-lisp :tangle config.el
+  (setq
+    org-agenda-files '("~/org/agenda"))
+#+end_src
+
+*** Quick open agenda-view menu
+
+Quick agenda-view opening with =C-c a=
+
+#+begin_src emacs-lisp :tangle config.el
+  (define-key global-map "\C-ca" 'org-agenda)
+#+end_src
+
+*** Open org-agenda main file
+
+The main file is an org file named =<current_year>.org=, inside the =~/org/agenda/=
+
+#+begin_src emacs-lisp :tangle config.el
+  (defun org-agenda-file-current ()
+      "Open the current agenda file <year>.org"
+      (interactive)
+      (find-file (concat
+                  "~/org/agenda/"
+                  (format-time-string "%Y")
+                  ".org")))
+#+end_src
+
+Add a keybinding to quickly open it with =C-c s=, mnemonically it sucks, but =s= is close to =a= on the keyboard
+
+#+begin_src emacs-lisp :tangle config.el
+  (define-key global-map "\C-cs" 'org-agenda-file-current)
+#+end_src
+
+*** Use priorities A-E
+
+Having just 3 priorities is a bit limiting
+
+#+begin_src emacs-lisp :tangle config.el
+  (setq org-lowest-priority ?E)
+#+end_src
+
+*** Custom todo list
+
+#+begin_src emacs-lisp :tangle config.el
+  (setq org-todo-keywords
+        '((sequence
+           "TODO(t)" "PROJ(p)" "IDEA(i)" "READ(r)"
+           "|" "DONE(d)" "KILL(k)")    ;; used for standard todo behavior, adding KILL state and some variants
+          (sequence
+           "[ ](T)" "[-](S)" "[?](W)"
+           "|" "[X](D)")                ;; These are used for checklist, use the standard TODO and DONE, plus add some other stuff
+          (sequence
+           "CHCK(c)"
+           "|" "YES(y)" "NO(n)")))        ;; These are used when checking the status of anything, and responding in accordance
+#+end_src
+
 * Package management
 Initialize the built-in package manager
 #+begin_src emacs-lisp :tangle packages.el
@@ -705,86 +800,4 @@ Used to debug rust code
 
 #+begin_src emacs-lisp :tangle packages.el
   (package! dap-mode)
-#+end_src
-* Custom config
-** Relative line numbers
-I use relative line numbers since they are much easier to work with when doing copy-paste in evil-mode
-
-#+begin_src emacs-lisp :tangle config.el
-  (setq display-line-numbers-type 'relative)
-  (global-display-line-numbers-mode)
-#+end_src
-
-** Custom snippets :DISABLED:
-
-*Moved to a snippet file*
-
-Set YASnippet to autosuggest code block for emacs
-
-I will keep this snippet here, I *do NOT* want to rewrite this org file without it :)
-
-#+begin_src emacs-lisp :tangle no
-  (yas-define-snippets 'org-mode
-    '(("eml" "#+begin_src emacs-lisp :tangle $1.el\n  $2\n#+end_src" "emacs-lisp")))
-#+end_src
-
-** Keybinding
-*** org-agenda
-**** Quick open agenda-view menu
-
-Quick agenda-view opening with =C-c a=
-
-#+begin_src emacs-lisp :tangle config.el
-  (define-key global-map "\C-ca" 'org-agenda)
-#+end_src
-**** Open org-agenda main file
-
-The main file is an org file named =<current_year>.org=, inside the =~/org/agenda/=
-
-#+begin_src emacs-lisp :tangle config.el
-  (defun org-agenda-file-current ()
-      "Open the current agenda file <year>.org"
-      (interactive)
-      (find-file (concat
-                  "~/org/agenda/"
-                  (format-time-string "%Y")
-                  ".org")))
-#+end_src
-
-Add a keybinding to quickly open it with =C-c s=, mnemonically it sucks, but =s= is close to =a= on the keyboard
-
-#+begin_src emacs-lisp :tangle config.el
-  (define-key global-map "\C-cs" 'org-agenda-file-current)
-#+end_src
-*** emacs config
-
-Define the function to open config file, just to have its name appear into doom menu
-
-#+begin_src emacs-lisp :tangle config.el
-  (defun org-config ()
-    "Open the default org config file"
-    (interactive)
-    (find-file "~/.config/doom/config.org"))
-#+end_src
-
-Open doom =config.org= (this file) with =C-c c=
-
-#+begin_src emacs-lisp :tangle config.el
-  (define-key global-map "\C-cc" 'org-config)
-#+end_src
-*** vterm
-
-open vterm buffer with =C-c v=
-
-#+begin_src emacs-lisp :tangle config.el
-  (define-key global-map "\C-cv" 'vterm)
-#+end_src
-
-** Org agenda directory
-
-Set the path for the org-agenda files
-
-#+begin_src emacs-lisp :tangle config.el
-  (setq
-    org-agenda-files '("~/org/agenda"))
 #+end_src
