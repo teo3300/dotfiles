@@ -1,0 +1,28 @@
+###
+### Set commands for keybinding
+###
+    ### Add ~/.local/bin folder to the path
+    set $lbin               "$HOME/.local/bin"
+
+    ### Adjust brightness
+    set $brightness_up      $lbin/brightnessUpFixed $brightness_step
+    set $brightness_down    $lbin/brightnessDownFixed $brightness_step
+
+    ### Adjust volume and mic mute
+    set $volume_up          wpctl set-volume @DEFAULT_AUDIO_SINK@ $volume_step%+
+    set $volume_down        wpctl set-volume @DEFAULT_AUDIO_SINK@ $volume_step%-
+    set $volume_mute        wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+    set $mic_toggle         wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+    ### Screenshots
+    set $save_fullscreen    grim "$HOME/Pictures/screenshots/$($lbin/get_focused)-$(date +%F_%H%M%S_%3N).png"
+    set $clip_screen_sel    grim -g "$(slurp)" - | wl-copy
+
+    ### Lock scree
+    set $lock               "$HOME/.config/sway/lock.sh $lock_bg 200"
+
+    ### Suspend system
+    set $suspend            systemctl suspend
+
+    ### Toggle trackpad
+    set $touchpad_toggle    swaymsg input "type:touchpad" events toggle enabled disabled
