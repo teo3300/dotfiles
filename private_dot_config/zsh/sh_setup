@@ -8,5 +8,7 @@ source $HOME/.config/zsh/sh_bindings
 
 if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
     source $HOME/.config/sway/startup_var
-    exec sway
+    exec sway \
+      > "/tmp/sway.log"\
+      2> "/tmp/sway.err"
 fi
