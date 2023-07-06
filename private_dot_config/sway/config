@@ -37,7 +37,6 @@ include $HOME/.config/sway/config.d/*
         before-sleep $lock
 
     ### Launch notification manager
-    exec dunst
     exec waybar
 
 ###

@@ -6,7 +6,7 @@
 
 ### Swaylock timeout
     set $lock_timer 300
-    set $black_screen_timer 60
+    set $black_screen_delay 60
 
 ### Wallpaper
     set $wallpaper "$HOME/Pictures/.wallpaper"
