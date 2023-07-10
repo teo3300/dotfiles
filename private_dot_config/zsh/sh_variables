@@ -5,6 +5,9 @@
 # Add doomemacs to PATH
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
+# Add gem executables to path
+export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
+
 # Some variables to make sure applications works under wayland
 export XDG_CONFIG_HOME="$HOME/.config"
 export QT_QPA_PLATFORM=wayland
@@ -14,3 +17,6 @@ export GTK_BACKEND=wayland
 # default editor and pager
 export EDITOR="emacsclient -a 'emacs'"
 export PAGER=less
+
+# resolve bundle permissions
+export BUNDLE_PATH=$HOME/.bundle/

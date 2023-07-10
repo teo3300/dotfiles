@@ -411,14 +411,14 @@ Define the function to open config file, just to have its name appear into doom 
 Open doom =config.org= (this file) with =C-c c=
 
 #+begin_src emacs-lisp :tangle config.el
-  (define-key global-map "\C-cc" 'org-config)
+  (define-key global-map (kbd "C-c c") 'org-config)
 #+end_src
 *** vterm
 
 open vterm buffer with =C-c v=
 
 #+begin_src emacs-lisp :tangle config.el
-  (define-key global-map "\C-cv" 'vterm)
+  (define-key global-map (kbd "C-c v") 'vterm)
 #+end_src
 
 *** Better resize keys
@@ -471,7 +471,7 @@ The main file is an org file named =<current_year>.org=, inside the =~/org/agend
 Add a keybinding to quickly open it with =C-c s=, mnemonically it sucks, but =s= is close to =a= on the keyboard
 
 #+begin_src emacs-lisp :tangle config.el
-  (define-key global-map "\C-cs" 'org-agenda-file-current)
+  (define-key global-map (kbd "C-c s") 'org-agenda-file-current)
 #+end_src
 
 *** Use priorities A-E
@@ -594,8 +594,8 @@ Install YASnippet to define custom snippets (mostly emacs-lisp block)
 #+end_src
 
 #+begin_src emacs-lisp :tangle config.el
-  (use-package! yasnippet
-      :ensure
+  (use-package yasnippet
+      :ensure t
       :config
       (yas-reload-all)
       ;; Run yasnippet in both text and prog mode
@@ -606,7 +606,7 @@ Install YASnippet to define custom snippets (mostly emacs-lisp block)
       (yas-global-mode 1)
 #+end_src
 
-** Other funny config for company and YASnippet
+*** Other funny config for company and YASnippet
 
 #+begin_src emacs-lisp :tangle config.el
   (defun company-yasnippet-or-completion ()
@@ -695,8 +695,8 @@ Setup lsp-mode, for now only used to work with rust-analyzer
 Run clippy on save
 
 #+begin_src emacs-lisp :tangle config.el
-  (use-package! lsp-mode
-    :ensure
+  (use-package lsp-mode
+    :ensure t
     :commands lsp
     :custom
     ;; what to use when checking on-save. "check" is default, I prefer clippy
@@ -725,8 +725,8 @@ Shows interpretation of every line and types on the side
 #+end_src
 
 #+begin_src emacs-lisp :tangle config.el
-  (use-package! lsp-ui
-    :ensure
+  (use-package lsp-ui
+    :ensure t
     :commands lsp-ui-mode
     :custom
     (lsp-ui-peek-always-show t)
@@ -742,7 +742,7 @@ Underline errors and show error message when hover
 #+end_src
 
 #+begin_src emacs-lisp :tangle config.el
-  (use-package! flycheck :ensure)
+  (use-package flycheck :ensure t)
 #+end_src
 *** rust
 Following Krahn's [[https://github.com/rksm/emacs-rust-config][emacs-rust-config]]
@@ -758,8 +758,8 @@ Install package
 And set basic keybinding
 
 #+begin_src emacs-lisp :tangle config.el
-  (use-package! rustic
-      :ensure
+  (use-package rustic
+      :ensure t
       :bind (:map rustic-mode-map
                 ("M-j" . lsp-ui-imenu)
                 ("M-?" . lsp-find-references)
@@ -797,6 +797,26 @@ Add hook to rustic-mode to auto save on exit, visit [[https://github.com/brotzei
     (when buffer-file-name
       (setq-local buffer-save-without-query t))
     (add-hook 'before-save-hook 'lsp-format-buffer nil t))
+#+end_src
+
+** org-roam
+
+#+begin_src emacs-lisp :tangle packages.el
+  (package! org-roam)
+#+end_src
+
+#+Begin_src emacs-lisp :tangle config.el
+  (use-package org-roam :ensure t)
+#+end_src
+
+Set the =org-roam= directory
+and keybindings to quick call functions
+
+#+begin_src emacs-lisp :tangle config.el
+  (setq org-roam-directory
+        (file-truename "~/org/roam"))
+  (global-set-key (kbd "C-c n f") 'org-roam-node-find)
+  (global-set-key (kbd "C-c n i") 'org-roam-node-insert)
 #+end_src
 
 * Modes
