@@ -2,6 +2,9 @@
 
 # Define any custom variable
 
+# Add local bins to PATh
+export PATH="$HOME/.local/bin:$PATH"
+
 # Add doomemacs to PATH
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
