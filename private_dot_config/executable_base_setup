@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Make executables executable
+for file in ~/.local/bin*; do chmod 755 "$file"; done
+
+# Install oh-my-zsh inthe most unsafe way
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Add entry to .zshrc to load config
+echo '' >> ~/.zshrc
+echo '# Include zsh configuration' >> ~/.zshrc
+echo 'for file in ~/.config/zsh/*; do source "$file"; done' >> ~/.zshrc
+
+# install needed packages
+sudo $(PKG_CMD)\
+	sway\
+	foot\
+	kitty\
+	neovim\
+	mpv\
+	bemenu\
+	swaylock\
+	swayidle\
+	waybar\
+	swaybg\
+	grim\
+	wl-clipboard\
+	brightnessctl\
+	ttf-nerd-fonts-symbols\
+	zsh-autosuggestions\
+	zsh-syntax-highlighting\
+	zsh\
+	syncthing\
+	emacs\
+	slurp\
+	mpv
