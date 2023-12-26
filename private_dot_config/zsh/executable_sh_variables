@@ -2,6 +2,9 @@
 
 # Define any custom variable
 
+# Funny path used by chezmoi
+export PATH="$HOME/bin:$PATH"
+
 # Add local bins to PATh
 export PATH="$HOME/.local/bin:$PATH"
 
