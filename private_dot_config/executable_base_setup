@@ -57,7 +57,9 @@ sudo $PKG_CMD \
 	syncthing \
 	emacs \
 	slurp \
-	wireguard
+	wireguard \
+	ranger \
+	cmake
 
 # Find another way to install fonts
 # ttf-nerd-fonts-symbols
