@@ -3,6 +3,6 @@
 # key: eml
 # --
 
-#+begin_src emacs-lisp${1: :tangle ${2:fileName}.el}
+#+begin_src emacs-lisp
   $0
 #+end_src

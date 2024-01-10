@@ -17,5 +17,6 @@ if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
     QT_QPA_PLATFORM=wayland\
     MOZ_ENABLE_WAYLAND=1\
     XDG_SESSION_TYPE=wayland\
+    GTK_BACKEND=wayland\
         exec sway > "$HOME/.config/sway/sway.log" 2> "$HOME/.config/sway/sway.err"
 fi

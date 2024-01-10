@@ -59,7 +59,10 @@ sudo $PKG_CMD \
 	slurp \
 	wireguard \
 	ranger \
-	cmake
+	cmake \
+	rust-analyzer \
+	libtool
+
 
 # Find another way to install fonts
 # ttf-nerd-fonts-symbols

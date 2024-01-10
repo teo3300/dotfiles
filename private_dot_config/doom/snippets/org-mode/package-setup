@@ -1,8 +1,0 @@
-# key: pak
-# name: package-setup
-# --
-
-#+begin_src emacs-lisp :tangle config.el
-  (use-package ${1:Package-name}
-    :ensure t$0)
-#+end_src

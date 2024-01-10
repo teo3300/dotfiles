@@ -2,7 +2,7 @@
 
 ### Volume and brightness steps
     set $volume_step 5
-    set $brightness_step 2
+    set $brightness_step 4
 
 ### Swaylock timeout
     set $lock_timer 300

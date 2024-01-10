@@ -18,7 +18,7 @@
     set $save_fullscreen    grim "$HOME/Pictures/screenshots/$($lbin/get_focused)-$(date +%F_%H%M%S_%3N).png"
     set $clip_screen_sel    grim -g "$(slurp)" - | wl-copy
 
-    ### Lock scree
+    ### Lock screen
     set $lock               "$HOME/.config/sway/lock.sh $lock_bg 200"
 
     ### Suspend system

@@ -11,3 +11,4 @@ alias vim='v'
 alias e="emacsclient -c -a 'emacs'"
 alias em="e"
 alias emacs="e"
+alias codium="codium --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-webrtc-pipewire-capturer"
