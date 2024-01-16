@@ -16,7 +16,12 @@ return {
                 width = 30,
             },
 
+            sort = {
+                sorter = "case_sensitive",
+            },
+
             renderer = {
+                group_empty = true,
                 icons = {
                     glyphs = {
                         folder = {

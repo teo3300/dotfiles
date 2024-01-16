@@ -21,6 +21,22 @@ vim.g.mapleader = ' '
 
 -- }}}
 
+-- Other keybindings {{{
+local keymap = vim.keymap
+-- keymap.set('n', '<leader>[keys]', '<cmd>[command]<CR>')
+-- terminal
+keymap.set('n', '<leader>v', '<cmd>terminal<CR>')
+-- movement
+keymap.set('n', '<C-h>', '<C-w>h')
+keymap.set('n', '<C-j>', '<C-w>j')
+keymap.set('n', '<C-k>', '<C-w>k')
+keymap.set('n', '<C-l>', '<C-w>l')
+keymap.set('n', '<C-left>',  '<C-w>h')
+keymap.set('n', '<C-down>',  '<C-w>j')
+keymap.set('n', '<C-up>',    '<C-w>k')
+keymap.set('n', '<C-right>', '<C-w>l')
+-- }}}
+
 -- Bootstrap lazy.nvim {{{
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

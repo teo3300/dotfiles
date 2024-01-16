@@ -239,12 +239,19 @@ Useful snippets to avoid writing too much
 Better file navigation
 #+begin_src emacs-lisp
   (use-package treemacs
-        :bind
+    :bind
     (:map global-map
       ("C-c C-r" . treemacs)
       ("C-c r" . treemacs-select-window)))
 #+end_src
 
+** which-key
+I have a REALLY bad memory
+#+begin_src emacs-lisp
+  (use-package which-key
+    :config
+    (which-key-mode))
+#+end_src
 ** vertico
 Better search
 #+begin_src emacs-lisp
