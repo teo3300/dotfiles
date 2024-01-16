@@ -22,5 +22,5 @@ chezmoi update
 
 To install needed packages, as well as zsh and its plugins, run the setup script
 ```sh
-~/.config/base_setup
+~/.config/base_setup/stage0
 ```
