@@ -20,9 +20,13 @@ export QT_QPA_PLATFORM=wayland
 export QT_QPA_PLATFORMTHEME=qt5ct
 export GTK_BACKEND=wayland
 
-# default editor and pager
-export EDITOR="emacsclient -a 'emacs'"
-export PAGER=less
-
 # resolve bundle permissions
 export BUNDLE_PATH=$HOME/.bundle/
+
+# default editor and pager
+export PAGER=less
+# EDITOR: depending on user choice, can be:
+# - nvim
+# - emacs
+# - emacsclient -a 'emacs'
+export EDITOR="nvim"

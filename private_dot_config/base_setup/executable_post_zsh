@@ -1,0 +1,71 @@
+#!/usr/bin/zsh
+
+# Installing chezmoi to push local changes
+echo Installing chezmoi
+sh -c "$(curl -fsLS get.chezmoi.io)"
+    
+# Make executables executable
+# for file in ~/.local/bin*; do chmod 755 "$file"; done
+# (Handled by chezmoi)
+
+# Add entry to .zshrc to load config
+echo '' >> ~/.zshrc
+echo '# Include zsh configuration' >> ~/.zshrc
+echo 'for file in ~/.config/zsh/*; do source "$file"; done' >> ~/.zshrc
+
+echo 'Select the default editor to use in this machine:'
+echo '1: nvim'
+echo '2: emacs (standalone)'
+echo '3: emacsclient (requires "emacs.service" user service running)'
+
+editor=''
+while [ ! $editor ]; do
+    vared -p '> [1-3]: ' -c editor
+    case "$editor" in
+        1)
+            editor="\"nvim\""
+            ;;
+        2)
+            editor="\"emacs\""
+            ;;
+        3)
+            editor="\"emacsclient -a 'emacs'\""
+            ;;
+        *)
+            echo "Please select a valid value"
+            editor=''
+            ;;
+    esac
+done
+
+echo "export EDITOR=$editor" >> ~/.config/zsh/sh_variables
+
+# install needed packages
+sudo $PKG_CMD \
+	sway \
+	foot \
+	kitty \
+	neovim \
+	mpv \
+	bemenu \
+	swaylock \
+	swayidle \
+	waybar \
+	swaybg \
+	grim \
+	wl-clipboard \
+	brightnessctl \
+	zsh-autosuggestions \
+	zsh-syntax-highlighting \
+	syncthing \
+	emacs \
+	slurp \
+	wireguard \
+	ranger \
+	cmake \
+	rust-analyzer \
+	libtool
+
+
+# Find another way to install fonts
+# ttf-nerd-fonts-symbols

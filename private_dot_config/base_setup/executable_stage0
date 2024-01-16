@@ -1,0 +1,27 @@
+#!/usr/bin/bash
+
+set -e
+
+# In case zsh is missing, install it and oh-my-zsh
+if ! which zsh &>/dev/null; then
+    # For how the script works do this separately
+    # Install oh-my-zsh in the most unsafe way
+    echo "zsh is not installed"
+    echo "Installing zsh and oh-my-zsh"
+    sudo $PKG_CMD zsh
+    chsh -s $(which zsh)
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    echo "Please run '.condfig/base_setup' again"
+fi
+
+# Check if $PKG_CMD has been provided
+if [[ -z $PKG_CMD ]]; then
+    echo 'Error: "$PKG_CMD" is not defined, please set this to your package manager install command'
+    echo 'e.g.:'
+    echo '    ubuntu: "apt install"'
+    echo '    fedora: "dnf install"'
+    echo '    arch:   "pacman -S"'
+    exit 1
+fi
+
+zsh ~/.config/base_setup/post_zsh

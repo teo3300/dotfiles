@@ -13,15 +13,15 @@ return {
         -- configure nvim-tree
         nvimtree.setup({
             view = {
-                width = 40,
+                width = 30,
             },
 
             renderer = {
                 icons = {
                     glyphs = {
                         folder = {
-                            arrow_closed = '>',
-                            arrow_open = 'v',
+                            arrow_closed = '▶',
+                            arrow_open = '▼',
                         },
                     },
                 },
