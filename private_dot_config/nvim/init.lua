@@ -23,18 +23,34 @@ vim.g.mapleader = ' '
 
 -- Other keybindings {{{
 local keymap = vim.keymap
--- keymap.set('n', '<leader>[keys]', '<cmd>[command]<CR>')
+
+--- normal mode 'n' {{{
+
 -- terminal
 keymap.set('n', '<leader>v', '<cmd>terminal<CR>')
 -- movement
-keymap.set('n', '<C-h>', '<C-w>h')
-keymap.set('n', '<C-j>', '<C-w>j')
-keymap.set('n', '<C-k>', '<C-w>k')
-keymap.set('n', '<C-l>', '<C-w>l')
+keymap.set('n', '<C-h>',     '<C-w>h')
+keymap.set('n', '<C-j>',     '<C-w>j')
+keymap.set('n', '<C-k>',     '<C-w>k')
+keymap.set('n', '<C-l>',     '<C-w>l')
 keymap.set('n', '<C-left>',  '<C-w>h')
 keymap.set('n', '<C-down>',  '<C-w>j')
 keymap.set('n', '<C-up>',    '<C-w>k')
 keymap.set('n', '<C-right>', '<C-w>l')
+-- clear highlights
+keymap.set('n', '<Esc>',     '<cmd>noh<CR>')
+
+--- }}}
+
+--- insert mode 'i' {{{
+
+keymap.set('i', '<C-h>', '<Left>')
+keymap.set('i', '<C-j>', '<Down>')
+keymap.set('i', '<C-k>', '<Up>')
+keymap.set('i', '<C-l>', '<Right>')
+
+--- }}}
+
 -- }}}
 
 -- Bootstrap lazy.nvim {{{
@@ -58,3 +74,7 @@ require('lazy').setup({
 })
 
 -- }}}
+
+-- Call it from outside because apparently config gets called
+-- before setting opts
+vim.cmd.colorscheme "catppuccin-mocha"
