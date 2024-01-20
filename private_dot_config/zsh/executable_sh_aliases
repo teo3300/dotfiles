@@ -23,4 +23,5 @@ alias codium="codium --enable-features=UseOzonePlatform --ozone-platform=wayland
 
 # github stuff {{{
 alias gs="git status"
+alias gu="git add -u"
 # }}}
