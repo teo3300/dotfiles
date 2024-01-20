@@ -1,7 +1,8 @@
--- vim:foldmethod=marker
-
 -- Vim setup {{{
 local set = vim.opt
+
+-- enable foldmethod=marker on every file
+set.foldmethod = "marker"
 
 -- tabs
 set.tabstop = 4

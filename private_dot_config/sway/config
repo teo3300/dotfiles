@@ -1,6 +1,5 @@
-###
-### Set basic keys
-###
+### Set basic keys {{{
+
     ### Logo key. Use Mod1 for Alt.
     set $mod Mod4
 
@@ -10,9 +9,10 @@
     set $up k
     set $right l
 
-###
-### Default applications
-###
+### }}}
+
+### Default applications {{{
+
     ### Preferred terminal and file manager
     set $term foot
     set $fm kitty -e ranger
@@ -20,12 +20,12 @@
     ### Default application launcher
     set $menu bemenu-run --ifne Wayland
 
+### }}}
+
 ### Load configuration in the external config file ###
 include $HOME/.config/sway/config.d/*
 
-###
-### Setup commands
-###
+### Setup commands (swaybg, swayidle, statusbar) {{{
 
     ### set the wallpaper
     output "*" bg $wallpaper fill
@@ -36,12 +36,35 @@ include $HOME/.config/sway/config.d/*
         timeout $(expr $lock_timer + $black_screen_delay) 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
         before-sleep $lock
 
-    ### Launch notification manager
+    ### Launch notification manager (forgetti)
     exec waybar
 
-###
-### Configure input
-###
+    # bar {
+    #     position top
+
+    #     # When the status_command prints a new line to stdout, swaybar updates.
+    #     # The default just shows the current date and time.
+    #     status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+
+    #     # Colors from catpuccin
+    #     colors {
+    #         background         $base
+    #         statusline         $text
+    #         focused_statusline $text
+    #         active_workspace   $base $text $blue
+    #         focused_separator  $base
+    #         focused_workspace  $base $base $green
+    #         active_workspace   $base $base $blue
+    #         inactive_workspace $base $base $surface1
+    #         urgent_workspace   $base $base $surface1
+    #         binding_mode       $base $base $surface1
+    #     }
+    # }
+
+### }}}
+
+### Configure input {{{
+
     # Set keyboard layouts to cycle through
     input type:keyboard {
         xkb_layout us
@@ -55,5 +78,7 @@ include $HOME/.config/sway/config.d/*
         dwt enabled
         tap enabled
         middle_emulation enabled
-	      natural_scroll disabled
+        natural_scroll disabled
     }
+
+### }}}

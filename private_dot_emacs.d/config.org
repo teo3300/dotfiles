@@ -32,7 +32,7 @@ Install and enable evil mode
 (I REFUSE to use emacs without vim keybindings)
 #+begin_src emacs-lisp
   (use-package evil
-        :demand t
+    :demand t
     :config
     (evil-mode 1))
 #+end_src
@@ -128,7 +128,7 @@ Just like this theme and I use it almost system-wide
 When I want the 80 columns constraint to be not only a soft one
 #+begin_src emacs-lisp
   (use-package olivetti
-        :bind
+    :bind
     (:map global-map
       ("C-c o" . olivetti-mode))
     :config
@@ -144,7 +144,7 @@ When I want the 80 columns constraint to be not only a soft one
 ** vterm
 #+begin_src emacs-lisp
   (use-package vterm  
-        :bind
+    :bind
     (:map global-map
           ("C-c v" . vterm)))
 #+end_src
@@ -153,7 +153,7 @@ When I want the 80 columns constraint to be not only a soft one
 *** company
 #+begin_src emacs-lisp
   (use-package company
-        :hook
+    :hook
     (after-init . global-company-mode)
     :custom
     ;; such config, much I understand nothing
@@ -264,7 +264,7 @@ Better search
 =lsp-mode= for now only used to work with rust-analyzer
 #+begin_src emacs-lisp
   (use-package lsp-mode
-        :commands lsp
+    :commands lsp
     :custom
 #+end_src
 
@@ -295,7 +295,7 @@ Better search
 Inline lsp overlay
 #+begin_src emacs-lisp
   (use-package lsp-ui
-        :commands lsp-ui-mode
+    :commands lsp-ui-mode
     :custom
     (lsp-ui-peek-always-show t)
     (lsp-ui-sideline-show-hover t)
@@ -308,18 +308,18 @@ Inline lsp overlay
 extension of rust-mode, with some additional features
 #+begin_src emacs-lisp
   (use-package rustic
-  :ensure
-  :bind (:map rustic-mode-map
-              ("M-j" . lsp-ui-imenu)
-              ("M-?" . lsp-find-references)
-              ("C-c C-c l" . flycheck-list-errors)
-              ("C-c C-c a" . lsp-execute-code-action)
-              ("C-c C-c r" . lsp-rename)
-              ("C-c C-c q" . lsp-workspace-restart)
-              ("C-c C-c Q" . lsp-workspace-shutdown)
-              ("C-c C-c s" . lsp-rust-analyzer-status))
-  :hook
-  (rustic-mode-hook . rk/rustic-mode-hook))
+    :ensure
+    :bind (:map rustic-mode-map
+                ("M-j" . lsp-ui-imenu)
+                ("M-?" . lsp-find-references)
+                ("C-c C-c l" . flycheck-list-errors)
+                ("C-c C-c a" . lsp-execute-code-action)
+                ("C-c C-c r" . lsp-rename)
+                ("C-c C-c q" . lsp-workspace-restart)
+                ("C-c C-c Q" . lsp-workspace-shutdown)
+                ("C-c C-c s" . lsp-rust-analyzer-status))
+    :hook
+    (rustic-mode-hook . rk/rustic-mode-hook))
 
   ;; comment to disable rustfmt on save
   (setq rustic-format-on-save t)
@@ -339,7 +339,7 @@ extension of rust-mode, with some additional features
 ** org-roam
 #+begin_src emacs-lisp
   (use-package org-roam
-        :config
+    :config
     (setq org-roam-directory (file-truename "~/org/roam"))
     :bind
     (:map global-map
@@ -356,7 +356,7 @@ extension of rust-mode, with some additional features
 *** markdown-mode
 #+begin_src emacs-lisp
   (use-package markdown-mode
-        :config
+    :config
     (add-to-list
       'auto-mode-alist
       '("\\.md\\'" . markdown-mode)))

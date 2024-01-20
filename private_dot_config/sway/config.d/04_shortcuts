@@ -1,4 +1,5 @@
-### Basic Key bindings
+### Basic Key bindings (default or ungrouped) {{{
+
     ### Start a terminal
     bindsym $mod+Return exec $term
     ### Open the file manager
@@ -32,9 +33,11 @@
 
     ### Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -m "WARNING: Do you really want to quit the current Wayland session?" -b 'Exit sway' 'swaymsg exit'
-###
-### Moving around:
-###
+
+### }}}
+
+### Moving around (change/move focused window/workspace) {{{
+
     ### Move your focus around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
@@ -57,12 +60,10 @@
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
 
-##### Previously content in
-###     config.d/workspaces (workspaces settings)
+### }}}
 
-###
-### Layout stuff:
-###
+### Layout stuff (fullscrin, spliting, layout) {{{
+#
     ### You can "split" the current object of your focus with
     ### $mod+b or $mod+v, for horizontal and vertical splits
     ### respectively.
@@ -86,9 +87,11 @@
 
     ### Move focus to the parent container
     bindsym $mod+a focus parent
-###
-### Scratchpad:
-###
+
+### }}}
+
+### Scratchpad {{{
+
     ### Sway has a "scratchpad", which is a bag of holding for windows.
     ### You can send windows there and get them back later.
 
@@ -98,36 +101,40 @@
     ### Show the next scratchpad window or hide the focused scratchpad window.
     ### If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
-###
-### Resizing containers:
-###
-mode "resize" {
-    ### left will shrink the containers width
-    ### right will grow the containers width
-    ### up will shrink the containers height
-    ### down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
 
-    ### Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+### }}}
 
-    ### Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-    bindsym $mod+r mode "default"
-}
-### Enter resize mode
-bindsym $mod+r mode "resize"
+### Resizing containers (move in and out of resize mode & resize windows) {{{
 
-###
-### Custom controls
-###
+    mode "resize" {
+        ### left will shrink the containers width
+        ### right will grow the containers width
+        ### up will shrink the containers height
+        ### down will grow the containers height
+        bindsym $left resize shrink width 10px
+        bindsym $down resize grow height 10px
+        bindsym $up resize shrink height 10px
+        bindsym $right resize grow width 10px
+    
+        ### Ditto, with arrow keys
+        bindsym Left resize shrink width 10px
+        bindsym Down resize grow height 10px
+        bindsym Up resize shrink height 10px
+        bindsym Right resize grow width 10px
+    
+        ### Return to default mode
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+    }
+    
+    ### Enter resize mode
+    bindsym $mod+r mode "resize"
+
+### }}}
+
+### Custom controls (volume, brightness, scrinshot, locks) {{{
+
     ### Dedicated button controls
 	bindsym XF86AudioRaiseVolume        exec $volume_up
 	bindsym $mod+XF86AudioRaiseVolume   exec $volume_up
@@ -158,3 +165,5 @@ bindsym $mod+r mode "resize"
 
     ### Suspend system
     bindsym $mod+Shift+Escape           exec $suspend
+
+### }}}

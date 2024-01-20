@@ -1,6 +1,5 @@
-###
-### Workspaces:
-###
+### Workspaces (workspaces) {{{
+
     ### Switch to the specified workspace
     bindsym $mod+1 workspace 1
     bindsym $mod+2 workspace 2
@@ -28,3 +27,5 @@
     bindsym $mod+Shift+grave move container to workspace X
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+
+### }}}
