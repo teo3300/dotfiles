@@ -78,4 +78,4 @@ require('lazy').setup({
 
 -- Call it from outside because apparently config gets called
 -- before setting opts
-vim.cmd.colorscheme "catppuccin-mocha"
+vim.cmd.colorscheme "catppuccin-latte"

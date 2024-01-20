@@ -1,0 +1,2 @@
+# Prevent backlight from sneaking in
+private_dot_config/sway/backlight
