@@ -1,14 +1,26 @@
 #!/bin/zsh
 
 # Aliases for zsh
-
+# listing aliases
 alias ls='ls --color=auto'
-alias rm='rm -i'
 alias ll='ls -al'
+
+# save my ass
+alias rm='rm -i'
+
+# all v-s go to the nvim
 alias v='nvim'
 alias vi='v'
 alias vim='v'
+
+# and all e-s go to the emacs
 alias e="emacsclient -c -a 'emacs'"
 alias em="e"
 alias emacs="e"
+
+# codium is just shitty
 alias codium="codium --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-webrtc-pipewire-capturer"
+
+# github stuff {{{
+alias gs="git status"
+# }}}

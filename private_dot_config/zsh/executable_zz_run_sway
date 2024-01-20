@@ -1,22 +1,14 @@
 #!/bin/zsh
 if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
 	
-    # Source variables
-    source $HOME/.bash_variables
-
-    # set previous brightness
-    # brightnessctl set $(cat "$HOME/.config/sway/backlight") > /dev/null
-
     export PATH="$HOME/.local/bin:$PATH"
 
     DATE=$(date +"%Y-%m-%d_%H-%M-%S")
     echo "==$DATE" > "$HOME/.config/sway/sway.log"
     echo "==$DATE" > "$HOME/.config/sway/sway.err"
 
-    _JAVA_AWT_WM_NONREPARENTING=1\
-    QT_QPA_PLATFORM=wayland\
-    MOZ_ENABLE_WAYLAND=1\
-    XDG_SESSION_TYPE=wayland\
-    GTK_BACKEND=wayland\
-        exec sway > "$HOME/.config/sway/sway.log" 2> "$HOME/.config/sway/sway.err"
+    source $HOME/.config/sway/startup_var
+    exec sway \
+        > "$HOME/.config/sway/sway.log" \
+        2> "$HOME/.config/sway/sway.err"
 fi
