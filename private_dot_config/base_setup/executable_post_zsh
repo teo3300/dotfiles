@@ -69,3 +69,6 @@ sudo $PKG_CMD \
 
 # Find another way to install fonts
 # ttf-nerd-fonts-symbols
+
+# Setting up catppuccin theme 
+zsh ~/.config/catppuccin_setup $CATPPUCCIN_FLAVOR

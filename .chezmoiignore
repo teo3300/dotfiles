@@ -2,5 +2,6 @@
 private_dot_config/systemd/user/default.target.wants
 private_dot_config/systemd/user/default.target.wants/emacs.service
 
-#
- private_dot_config/sway/backlight
+# Ignore palette files
+.config/*/palette
+.config/sway/config.d/palette

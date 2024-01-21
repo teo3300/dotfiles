@@ -1,2 +1,4 @@
-# Prevent backlight from sneaking in
-private_dot_config/sway/backlight
+# Ignore palette files since these are setup during the
+# catpuccin_setup step
+private_dot_config/*/palette
+private_dot_config/sway/config.d/palette

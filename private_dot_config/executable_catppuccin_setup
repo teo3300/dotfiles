@@ -1,0 +1,58 @@
+#!/bin/zsh
+
+set -e
+
+CATPPUCCIN_PATH="$HOME/.config/catppuccin"
+
+mkdir -p $CATPPUCCIN_PATH
+
+# If no theme is specified fallback to mocha
+THEME="mocha"
+if [ "$1" ]; then
+    THEME="$1"
+fi
+
+install_and_link() { 
+    # $1: url of the palette theme
+    # $2: file to link
+    # $3: application using it (probably can be removed in the future)
+
+    # Determine file name
+    FILE="$CATPPUCCIN_PATH/$3-$THEME"
+
+    if [ ! -f "$FILE" ]; then
+        echo -n "pulling missing file: $3-$THEME ... "
+        curl "$1 -o $FILE -s"
+        echo "Ok"
+    fi
+    if ! (diff $FILE $2 >/dev/null); then
+        echo "linking: $3-$THEME"
+        ln -f $FILE "$2"
+    fi
+}
+
+# sway  .config/sway/config.d/05_palette
+install_and_link \
+    "https://raw.githubusercontent.com/catppuccin/i3/main/themes/catppuccin-$THEME" \
+    $HOME/.config/sway/config.d/05_palette \
+    sway
+
+# foot .config/foot/palette
+install_and_link \
+    "https://raw.githubusercontent.com/catppuccin/foot/main/catppuccin-$THEME.ini" \
+    $HOME/.config/foot/palette \
+    foot
+
+# kitty .
+install_and_link \
+    "https://raw.githubusercontent.com/catppuccin/kitty/main/themes/$THEME.conf" \
+    $HOME/.config/kitty/palette \
+    kitty
+
+################################################################################
+
+# nvim 
+if ! grep "vim.cmd.colorscheme \"catppuccin-$THEME\"" $HOME/.config/nvim/init.lua > /dev/null; then
+    echo "setting: vim-$THEME"
+    sed -i 's/\(.*colorscheme "catppuccin\).*/\1-'"${THEME}"'"/g' $HOME/.config/nvim/init.lua
+fi
