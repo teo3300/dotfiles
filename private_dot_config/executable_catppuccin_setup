@@ -22,7 +22,7 @@ install_and_link() {
 
     if [ ! -f "$FILE" ]; then
         echo -n "pulling missing file: $3-$THEME ... "
-        curl "$1 -o $FILE -s"
+        curl $1 -o $FILE -s
         echo "Ok"
     fi
     if ! (diff $FILE $2 >/dev/null); then
@@ -34,7 +34,7 @@ install_and_link() {
 # sway  .config/sway/config.d/05_palette
 install_and_link \
     "https://raw.githubusercontent.com/catppuccin/i3/main/themes/catppuccin-$THEME" \
-    $HOME/.config/sway/config.d/05_palette \
+    $HOME/.config/sway/config.d/palette \
     sway
 
 # foot .config/foot/palette
@@ -52,7 +52,8 @@ install_and_link \
 ################################################################################
 
 # nvim 
-if ! grep "vim.cmd.colorscheme \"catppuccin-$THEME\"" $HOME/.config/nvim/init.lua > /dev/null; then
+NVIM_THEME_FILE="$HOME/.config/nvim/lua/plugins/catppuccin.lua"
+if ! grep "vim.cmd.colorscheme \"catppuccin-$THEME\"" $NVIM_THEME_FILE > /dev/null; then
     echo "setting: vim-$THEME"
-    sed -i 's/\(.*colorscheme "catppuccin\).*/\1-'"${THEME}"'"/g' $HOME/.config/nvim/init.lua
+    sed -i 's/\(.*colorscheme "catppuccin-\).*/\1'"${THEME}"'"/g' $NVIM_THEME_FILE
 fi

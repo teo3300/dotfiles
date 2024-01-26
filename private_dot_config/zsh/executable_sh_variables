@@ -16,9 +16,6 @@ export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
 # Some variables to make sure applications works under wayland
 export XDG_CONFIG_HOME="$HOME/.config"
-export QT_QPA_PLATFORM=wayland
-export QT_QPA_PLATFORMTHEME=qt5ct
-export GTK_BACKEND=wayland
 
 # resolve bundle permissions
 export BUNDLE_PATH=$HOME/.bundle/

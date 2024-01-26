@@ -64,6 +64,7 @@ sudo $PKG_CMD \
 	ranger \
 	cmake \
 	rust-analyzer \
+    sxiv \
 	libtool
 
 

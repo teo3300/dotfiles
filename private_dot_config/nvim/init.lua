@@ -17,8 +17,10 @@ set.relativenumber = true
 -- ruler
 set.colorcolumn = "80,120"
 
--- better leader
-vim.g.mapleader = ' '
+-- better leader ('\' is actually good on us keyboard
+-- vim.g.mapleader = ' '
+
+set.laststatus = 2
 
 -- }}}
 
@@ -55,6 +57,8 @@ keymap.set('i', '<C-l>', '<Right>')
 -- }}}
 
 -- Bootstrap lazy.nvim {{{
+-- Bro, for the love of god, read the F-ing
+-- https://github.com/folke/lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -78,4 +82,3 @@ require('lazy').setup({
 
 -- Call it from outside because apparently config gets called
 -- before setting opts
-vim.cmd.colorscheme "catppuccin-latte"

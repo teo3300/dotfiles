@@ -1,6 +1,6 @@
 return {
-    'nvim-telescope/telescope.nvim', tag = '0.1.5',
+    'ThePrimeagen/harpoon',
     dependencies = {
         'nvim-lua/plenary.nvim'
-    },
+    }
 }

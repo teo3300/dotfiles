@@ -1,7 +1,10 @@
 # systemd silly stuff
-private_dot_config/systemd/user/default.target.wants
-private_dot_config/systemd/user/default.target.wants/emacs.service
+.config/systemd/user/default.target.wants
+.config/systemd/user/default.target.wants/emacs.service
 
 # Ignore palette files
 .config/*/palette
 .config/sway/config.d/palette
+
+# Why are palette even here?
+.config/catppuccin/
