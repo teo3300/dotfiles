@@ -8,3 +8,6 @@
 
 # Why are palette even here?
 .config/catppuccin/
+
+# Prevent compilation to update this
+.emacs.d/init.el
