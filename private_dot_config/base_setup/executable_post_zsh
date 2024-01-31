@@ -42,30 +42,25 @@ echo "export EDITOR=$editor" >> ~/.config/zsh/sh_variables
 
 # install needed packages
 sudo $PKG_CMD \
-	sway \
-	foot \
-	kitty \
-	neovim \
-	mpv \
-	bemenu \
-	swaylock \
-	swayidle \
-	waybar \
-	swaybg \
-	grim \
-	wl-clipboard \
-	brightnessctl \
-	zsh-autosuggestions \
-	zsh-syntax-highlighting \
-	syncthing \
-	emacs \
-	slurp \
-	wireguard \
-	ranger \
-	cmake \
-	rust-analyzer \
+    sway \
+    foot \
+    kitty \
+    neovim \
+    bemenu \
+    swaylock \
+    swayidle \
+    waybar \
+    swaybg \
+    grim \
+    wl-clipboard \
+    brightnessctl \
+    zsh-autosuggestions \
+    zsh-syntax-highlighting \
+    syncthing \
+    slurp \
+    wireguard \
+    ranger \
     sxiv \
-	libtool
 
 
 # Find another way to install fonts

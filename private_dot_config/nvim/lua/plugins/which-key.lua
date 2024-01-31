@@ -29,6 +29,7 @@ return {
             f = {
                 name = 'Telescope',
                 f = {telescope.find_files   , 'Find file'},
+                p = {telescope.git_files    , 'Find git'},
                 g = {telescope.live_grep    , 'Live grep'},
                 b = {telescope.buffers      , 'Buffer search'},
                 h = {telescope.help_tags    , 'Help tags'},

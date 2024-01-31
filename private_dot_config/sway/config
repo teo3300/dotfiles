@@ -36,30 +36,27 @@ include $HOME/.config/sway/config.d/*
         timeout $(expr $lock_timer + $black_screen_delay) 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
         before-sleep $lock
 
-    ### Launch notification manager (forgetti)
-    exec waybar
+    bar {
+    # # uncomment to actually move on top
+    # position top
 
-    # bar {
-    #     position top
+        # COPR's i3status-rs does not properly show CPU usage
+        status_command $HOME/git/i3status-rust/target/release/i3status-rs
 
-    #     # When the status_command prints a new line to stdout, swaybar updates.
-    #     # The default just shows the current date and time.
-    #     status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-
-    #     # Colors from catpuccin
-    #     colors {
-    #         background         $base
-    #         statusline         $text
-    #         focused_statusline $text
-    #         active_workspace   $base $text $blue
-    #         focused_separator  $base
-    #         focused_workspace  $base $base $green
-    #         active_workspace   $base $base $blue
-    #         inactive_workspace $base $base $surface1
-    #         urgent_workspace   $base $base $surface1
-    #         binding_mode       $base $base $surface1
-    #     }
-    # }
+        # Colors from catpuccin
+        colors {
+            background         $base
+            statusline         $text
+            focused_statusline $text
+            active_workspace   $base $text $blue
+            focused_separator  $base
+            focused_workspace  $base $base $green
+            active_workspace   $base $base $blue
+            inactive_workspace $base $base $surface1
+            urgent_workspace   $base $base $surface1
+            binding_mode       $base $base $surface1
+        }
+    }
 
 ### }}}
 

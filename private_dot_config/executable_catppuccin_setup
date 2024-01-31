@@ -49,6 +49,12 @@ install_and_link \
     $HOME/.config/kitty/palette \
     kitty
 
+# i3status-rust
+install_and_link \
+    "https://raw.githubusercontent.com/greshake/i3status-rust/master/files/themes/ctp-$THEME.toml" \
+    $HOME/.config/i3status-rust/themes/palette.toml \
+    i3status-rs
+
 ################################################################################
 
 # nvim 

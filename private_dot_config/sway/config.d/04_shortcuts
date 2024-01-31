@@ -12,11 +12,15 @@
     ### Kill focused window
     bindsym $mod+Shift+q kill
 
-    ### Start emacsclient in the home folder
-    bindsym $mod+p exec emacsclient -c -a 'emacs'
-    bindsym $mod+Shift+p exec $term emacsclient -nw -c -a 'emacs'
-    ### Open the default agenda
-    bindsym $mod+Shift+a exec emacsclient -c -a 'emacs' $emacs_agenda
+    ### New tmux/Attach tmux
+    bindsym $mod+Shift+p exec $term tmux
+    bindsym $mod+p exec $term tmux a
+
+    ### Join the Internet
+    bindsym $mod+o exec firefox
+
+    ### Send funny images and text
+    bindsym $mod+i exec telegram-desktop
 
     ### Toggle trackpad
     bindsym $mod+Shift+t exec $touchpad_toggle
@@ -62,7 +66,7 @@
 
 ### }}}
 
-### Layout stuff (fullscrin, spliting, layout) {{{
+### Layout stuff (fullscreen, spliting, layout) {{{
 #
     ### You can "split" the current object of your focus with
     ### $mod+b or $mod+v, for horizontal and vertical splits
