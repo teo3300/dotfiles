@@ -49,7 +49,6 @@ sudo $PKG_CMD \
     bemenu \
     swaylock \
     swayidle \
-    waybar \
     swaybg \
     grim \
     wl-clipboard \
