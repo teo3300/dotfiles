@@ -3,6 +3,7 @@ local set = vim.opt
 
 -- enable foldmethod=marker on every file
 set.foldmethod = "marker"
+set.foldlevelstart = 99
 
 -- tabs
 set.tabstop = 4

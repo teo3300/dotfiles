@@ -1,3 +1,6 @@
+# For config refer to official docs to
+# https://greshake.github.io/i3status-rust/i3status_rs/blocks/index.html
+
 icons_format = "{icon}"
 
 [theme]
@@ -50,7 +53,12 @@ block = "backlight"
 
 [[block]]
 block = "battery"
-format = " $icon  $percentage "
+format = " $icon $percentage "
+
+[[block]]
+block = "keyboard_layout"
+driver = "sway"
+format = " 🌐 $variant "
 
 [[block]]
 block = "time"

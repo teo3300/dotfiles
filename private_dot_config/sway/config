@@ -40,6 +40,8 @@ include $HOME/.config/sway/config.d/*
     # # uncomment to actually move on top
     # position top
 
+        mode hide
+
         # COPR's i3status-rs does not properly show CPU usage
         status_command $HOME/git/i3status-rust/target/release/i3status-rs
 
@@ -64,9 +66,13 @@ include $HOME/.config/sway/config.d/*
 
     # Set keyboard layouts to cycle through
     input type:keyboard {
-        xkb_layout us
-        # Use caps as an escape and right alt as compose key
-        xkb_options caps:escape,compose:ralt
+        # Standard US layout and Dvorak-dev layout
+        xkb_layout us,us(dvorak)
+        # Set some keys
+        #   CapsLock behave as Esc, Shift + CapsLock behave like CapsLock
+        #   RightAlt compose key
+        #   LeftShift + RightShift cycle throught layouts
+        xkb_options caps:escape_shifted_capslock,compose:ralt,grp:shifts_toggle
     }
 
     input type:touchpad {

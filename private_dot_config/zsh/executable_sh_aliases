@@ -23,10 +23,6 @@ alias e="emacsclient -c -a 'emacs'"
 alias em="e"
 alias emacs="e"
 
-# Code is just shitty
-# Planning on getting rid of it anyway
-alias codium="codium --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-webrtc-pipewire-capturer"
-
 # github stuff {{{
 alias gs="git status"
 alias gu="git add -u"
