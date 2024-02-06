@@ -13,14 +13,14 @@
     bindsym $mod+Shift+q kill
 
     ### New tmux/Attach tmux
-    bindsym $mod+Shift+p exec $term tmux
-    bindsym $mod+p exec $term tmux a
+    bindsym $mod+Shift+semicolon exec $term tmux
+    bindsym $mod+semicolon exec $term tmux a
 
     ### Join the Internet
-    bindsym $mod+o exec firefox
+    bindsym $mod+y exec firefox
 
     ### Send funny images and text
-    bindsym $mod+i exec telegram-desktop
+    bindsym $mod+u exec telegram-desktop
 
     ### Toggle trackpad
     bindsym $mod+Shift+t exec $touchpad_toggle

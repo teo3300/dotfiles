@@ -14,28 +14,12 @@ block = "net"
 format = " $icon {$ssid ($signal_strength)} "
 
 [[block]]
-block = "disk_space"
-path = "/"
-info_type = "available"
-alert_unit = "GB"
-interval = 20
-warning = 20.0
-alert = 10.0
-format = " $icon $available.eng(w:2) "
-
-[[block]]
 block = "sound"
-format = " $icon $output_name{ $volume|} "
+format = "$icon $output_name{ $volume|}"
 [block.mappings]
 "bluez_output.00_1B_66_0F_26_BD.1"  = "HD 450SE"
 "audio_effect.j313-convolver"       = "Speakers"
 "alsa_output.platform-sound.HiFi__hw_AppleJ313_0__sink" = "Jack audio"
-
-[[block]]
-block = "bluetooth"
-mac = "00:1B:66:0F:26:BD" # My headset
-disconnected_format = ""
-format = " $icon $name $percentage "
 
 [[block]]
 block = "cpu"
@@ -45,25 +29,25 @@ critical_cpu = 90
 
 [[block]]
 block = "memory"
-format = " $icon $mem_total_used_percents.eng(w:2) "
-format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
+format = "$icon $mem_total_used_percents.eng(w:2)"
+format_alt = "$icon_swap $swap_used_percents.eng(w:2)"
 
 [[block]]
 block = "backlight"
 
 [[block]]
 block = "battery"
-format = " $icon $percentage "
+format = "$icon $percentage"
 
 [[block]]
 block = "keyboard_layout"
 driver = "sway"
-format = " 🌐 $variant "
+format = "🌐 $variant"
 
 [[block]]
 block = "time"
 interval = 5
-format = " $icon $timestamp.datetime(f:'%R | %d/%m')"
+format = "$icon $timestamp.datetime(f:'%R | %d/%m')"
 
 [[block]]
 block = "pomodoro"

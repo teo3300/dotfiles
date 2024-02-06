@@ -1,4 +1,4 @@
-### Set basic keys {{{
+## Set basic keys {{{
 
     ### Logo key. Use Mod1 for Alt.
     set $mod Mod4
@@ -40,7 +40,7 @@ include $HOME/.config/sway/config.d/*
     # # uncomment to actually move on top
     # position top
 
-        mode hide
+        # mode hide
 
         # COPR's i3status-rs does not properly show CPU usage
         status_command $HOME/git/i3status-rust/target/release/i3status-rs
@@ -66,8 +66,8 @@ include $HOME/.config/sway/config.d/*
 
     # Set keyboard layouts to cycle through
     input type:keyboard {
-        # Standard US layout and Dvorak-dev layout
-        xkb_layout us,us(dvorak)
+        # [fancy layout, still to decide] and standard US layout 
+        xkb_layout us(colemak_dh),us
         # Set some keys
         #   CapsLock behave as Esc, Shift + CapsLock behave like CapsLock
         #   RightAlt compose key
@@ -84,4 +84,4 @@ include $HOME/.config/sway/config.d/*
         natural_scroll disabled
     }
 
-### }}}
+
