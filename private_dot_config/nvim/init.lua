@@ -18,12 +18,8 @@ set.relativenumber = true
 -- ruler
 set.colorcolumn = "80,120"
 
--- better leader ('\' is actually good on us keyboard
--- vim.g.mapleader = ' '
-
-set.laststatus = 2
-
--- }}}
+-- better leader ('\' is actually good on us keyboard)
+vim.g.mapleader = ' '
 
 -- Bootstrap lazy.nvim {{{
 -- Bro, for the love of god, read the F-ing
@@ -40,14 +36,7 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
-
-require('lazy').setup({
-    spec = {
-        { import = 'plugins' },
-    }
-})
-
+require("lazy-conf")
 -- }}}
 
--- Call it from outside because apparently config gets called
--- before setting opts
+require("mappings")
