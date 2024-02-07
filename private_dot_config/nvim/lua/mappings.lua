@@ -1,48 +1,67 @@
 -- Set leader
 vim.g.mapleader = ' '
 
--- quick mappings in normal mode {{{
-    -- back to Ex
-    vim.keymap.set('n', '<leader>pv',   vim.cmd.Ex)
-    vim.keymap.set('n', 'q',            vim.cmd.Ex) 
-    -- move in tabs
-    vim.keymap.set('n', '<Tab>',        vim.cmd.tabn)
-    vim.keymap.set('n', '<S-Tab>',      vim.cmd.tabp)
-    -- quick normal and quit
-    vim.keymap.set('n', '<Esc>',        vim.cmd.noh)
+local map = vim.keymap.set
+
+-- (n) quick mappings in normal mode {{{
+-- back to Ex
+map('n', '<leader>pv',   vim.cmd.Ex)
+map('n', 'q',            vim.cmd.Ex)
+-- move in tabs
+map('n', '<Tab>',        vim.cmd.tabn)
+map('n', '<S-Tab>',      vim.cmd.tabp)
+-- keep cursor in handy position
+map('n', '<C-d>',        '<C-d>zz')
+map('n', '<C-u>',        '<C-u>zz')
+map('n', 'n',            'nzzzv')
+map('n', 'N',            'Nzzzc')
+-- unhilight
+map('n', '<Esc>',        vim.cmd.noh)
 -- }}}
--- quick mappings in insert mode {{{
-    -- move in insert mode
-    vim.keymap.set('i', '<C-h>',        '<Left>')
-    vim.keymap.set('i', '<C-j>',        '<Down>')
-    vim.keymap.set('i', '<C-k>',        '<Up>')
-    vim.keymap.set('i', '<C-l>',        '<Right>')
+-- (i) quick mappings in insert mode {{{
+-- move in insert mode
+map('i', '<C-h>',        '<Left>')
+map('i', '<C-j>',        '<Down>')
+map('i', '<C-k>',        '<Up>')
+map('i', '<C-l>',        '<Right>')
+-- }}}
+-- (v) quick mappings in visual mode {{{
+map('v', 'J', "<cmd>m '>+1<CR>gv=gv'")
+map('v', 'K', "<cmd>m '<-2<CR>gv=gv'")
+-- }}}
+
+-- Copy/cut in sys clip {{{
+map('n', '<leader>y', '"+y')
+map('v', '<leader>y', '"+y')
+map('n', '<leader>d', '"_d')
+map('v', '<leader>d', '"_d')
 -- }}}
 
 -- Telescope {{{
-    local telescope = require('telescope.builtin')
-    vim.keymap.set('n', '<leader>ff', telescope.find_files)
-    vim.keymap.set('n', '<leader>fp', telescope.git_files)
-    vim.keymap.set('n', '<leader>fg', telescope.live_grep)
-    vim.keymap.set('n', '<leader>fb', telescope.buffers)
-    vim.keymap.set('n', '<leader>fh', telescope.help_tags)
+local telescope = require('telescope.builtin')
+map('n', '<leader>ff', telescope.find_files)
+map('n', '<leader>fp', telescope.git_files)
+map('n', '<leader>fg', telescope.live_grep)
+map('n', '<leader>fb', telescope.buffers)
+map('n', '<leader>fh', telescope.help_tags)
+map('n', '<leader>fm', telescope.marks)
 -- }}}
 -- Harpoon {{{
-    -- Finally configure harpoon
-    local mark = require('harpoon.mark')
-    local ui = require('harpoon.ui')
-    -- Add current file to harpoon
-    vim.keymap.set('n', '<leader>a',    mark.add_file)
-    vim.keymap.set('n', '<C-e>',        ui.toggle_quick_menu)
-    -- Harpoon nav file done with qwerty
-    vim.keymap.set('n', '<C-h>',        function() ui.nav_file(1) end)
-    vim.keymap.set('n', '<C-j>',        function() ui.nav_file(2) end)
-    vim.keymap.set('n', '<C-k>',        function() ui.nav_file(3) end)
-    vim.keymap.set('n', '<C-l>',        function() ui.nav_file(4) end)
+-- Finally configure harpoon
+local mark = require('harpoon.mark')
+local ui = require('harpoon.ui')
+-- Add current file to harpoon
+map('n', '<leader>a',    mark.add_file)
+map('n', '<C-e>',        ui.toggle_quick_menu)
+-- Harpoon nav file done with qwerty
+map('n', '<C-h>',        function() ui.nav_file(1) end)
+map('n', '<C-j>',        function() ui.nav_file(2) end)
+map('n', '<C-k>',        function() ui.nav_file(3) end)
+map('n', '<C-l>',        function() ui.nav_file(4) end)
 -- }}}
 -- UndoTree {{{
-    vim.keymap.set('n', '<leader>u',    vim.cmd.UndotreeToggle)
+map('n', '<leader>u',    vim.cmd.UndotreeToggle)
 -- }}}
 -- Vim-fugitive {{{
-    vim.keymap.set('n', '<leader>gs',   vim.cmd.Git)
+map('n', '<leader>gs',   vim.cmd.Git)
 -- }}}
