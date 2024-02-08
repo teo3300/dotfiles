@@ -30,3 +30,5 @@ set.colorcolumn = "80,120"
 -- better leader ('\' is actually good on us keyboard)
 vim.g.mapleader = ' '
 
+-- attempt autoformatting on save using default LSP
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
