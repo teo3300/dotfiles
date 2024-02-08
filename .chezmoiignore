@@ -16,5 +16,7 @@
 .config/nvim/lazy-lock.json
 
 # i3status-rs globby files
+.config/i3status-rust/themes/
 .config/i3status-rust/themes/*
+.config/i3status-rust/icons/
 .config/i3status-rust/icons/*
