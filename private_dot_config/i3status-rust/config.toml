@@ -42,7 +42,10 @@ format = "$icon $percentage"
 [[block]]
 block = "keyboard_layout"
 driver = "sway"
-format = "🌐 $variant"
+format = "🌐 $layout"
+[block.mappings]
+"English (Colemak-DH ISO)" = "Col-DH_ISO"
+"English (US)" = "qwerty_US"
 
 [[block]]
 block = "time"
