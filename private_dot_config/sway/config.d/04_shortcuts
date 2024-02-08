@@ -161,9 +161,9 @@
     ### Clip screen selection
 	bindsym --release Shift+Print	    exec $clip_screen_sel
 	bindsym --release $mod+Shift+s	    exec $clip_screen_sel
+	bindsym XF86LaunchA                 exec $clip_screen_sel
 
     ### Lock screen
-	bindsym XF86LaunchA                 exec $lock
     bindsym $mod+Escape                 exec $lock
     bindswitch --reload --locked lid:on exec $lock
 

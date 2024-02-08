@@ -67,7 +67,7 @@ include $HOME/.config/sway/config.d/*
     # Set keyboard layouts to cycle through
     input type:keyboard {
         # [fancy layout, still to decide] and standard US layout 
-        xkb_layout us(colemak_dh),us
+        xkb_layout us(colemak_dh_iso),us
         # Set some keys
         #   CapsLock behave as Esc, Shift + CapsLock behave like CapsLock
         #   RightAlt compose key
