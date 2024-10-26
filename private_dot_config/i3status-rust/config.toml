@@ -17,8 +17,9 @@ format = " $icon {$ssid ($signal_strength)} "
 block = "sound"
 format = "$icon $output_name{ $volume|}"
 [block.mappings]
-"bluez_output.00_1B_66_0F_26_BD.1"  = "HD 450SE"
-"audio_effect.j313-convolver"       = "Speakers"
+"bluez_output.00_1B_66_0F_26_BD.1"                      = "HD 450SE"
+"bluez_output.30_53_C1_DA_C1_D5.1"                      = "WF-C500"
+"audio_effect.j313-convolver"                           = "Speakers"
 "alsa_output.platform-sound.HiFi__hw_AppleJ313_0__sink" = "Jack audio"
 
 [[block]]
@@ -44,7 +45,7 @@ block = "keyboard_layout"
 driver = "sway"
 format = "🌐 $layout"
 [block.mappings]
-"English (Colemak-DH ISO)" = "Col-DH_ISO"
+"English (Colemak-DH Ortholinear)" = "Col-DH"
 "English (US)" = "qwerty_US"
 
 [[block]]
