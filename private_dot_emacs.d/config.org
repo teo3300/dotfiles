@@ -28,13 +28,20 @@ Initialize built-in package manager and =use package=
 
 * Bare minimum
 ** [[https://github.com/emacs-evil/evil][Evil]] mode
-Install and enable evil mode
+Install and enable evil mode and use undo-tree
 (I REFUSE to use emacs without vim keybindings)
 #+begin_src emacs-lisp
-  (use-package evil
-    :demand t
-    :config
-    (evil-mode 1))
+(use-package undo-tree
+  :ensure t
+  :config
+  (global-undo-tree-mode))
+
+(use-package evil
+  :ensure t
+  ;:demand t
+  :config
+  (evil-mode 1)
+  (evil-set-undo-system 'undo-tree))
 #+end_src
 
 ** Line numbering
@@ -337,7 +344,7 @@ extension of rust-mode, with some additional features
 #+end_src
 
 ** org-roam
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package org-roam
     :config
     (setq org-roam-directory (file-truename "~/org/roam"))
@@ -360,4 +367,18 @@ extension of rust-mode, with some additional features
     (add-to-list
       'auto-mode-alist
       '("\\.md\\'" . markdown-mode)))
+#+end_src
+
+* Org - LaTeX export
+
+Eval all buffer in the file
+#+begin_src emacs-lisp :tangle no
+  (defun run-src-blocks-before-export ()
+    "Execute src blocks in the file before exporting LaTeX."
+    (org-babel-execute-buffer))
+#+end_src
+
+Execute the specified function before the export process
+#+begin_src emacs-lisp :tangle no
+(add-hook 'org-export-before-processing-functions 'run-src-blocks-before-export)
 #+end_src
