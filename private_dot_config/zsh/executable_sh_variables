@@ -13,8 +13,4 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 # default editor and pager
 export PAGER=less
-# EDITOR: depending on user choice, can be:
-# - nvim
-# - emacs
-# - emacsclient -a 'emacs'
-export EDITOR="nvim"
+export EDITOR=nvim

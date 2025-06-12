@@ -2,12 +2,9 @@
 
     ### Start a terminal
     bindsym $mod+Return exec $term
-    ### Open the file manager
-    bindsym $mod+Shift+Return exec $fm
 
     ### Start the app launcher
     bindsym $mod+d exec $menu
-    bindsym XF86Search exec $menu
 
     ### Kill focused window
     bindsym $mod+Shift+q kill
@@ -86,9 +83,6 @@
     ### Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
 
-    ### Swap focus between the tiling area and the floating area
-    # bindsym $mod+space focus mode_toggle # Now assigned to IME toggle
-
     ### Move focus to the parent container
     bindsym $mod+a focus parent
 
@@ -137,7 +131,7 @@
 
 ### }}}
 
-### Custom controls (volume, brightness, scrinshot, locks) {{{
+### Custom controls (volume, brightness, screenshot, locks) {{{
 
     ### Dedicated button controls
 	bindsym XF86AudioRaiseVolume        exec $volume_up
@@ -155,13 +149,10 @@
    	bindsym $mod+Shift+m                exec $mic_toggle
 
     ### Save screenshot of the whole screen
-	bindsym Print                       exec $save_fullscreen
 	bindsym $mod+s                      exec $save_fullscreen
 
     ### Clip screen selection
-	bindsym --release Shift+Print	    exec $clip_screen_sel
 	bindsym --release $mod+Shift+s	    exec $clip_screen_sel
-	bindsym XF86LaunchA                 exec $clip_screen_sel
 
     ### Lock screen
     bindsym $mod+Escape                 exec $lock

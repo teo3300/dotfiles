@@ -6,7 +6,7 @@ local map = vim.keymap.set
 -- (n) quick mappings in normal mode {{{
 -- back to Ex
 map('n', '<leader>pv', vim.cmd.Ex)
-map('n', 'q', vim.cmd.Ex)
+-- map('n', 'q', vim.cmd.Ex)
 -- move in tabs
 map('n', '<Tab>', vim.cmd.tabn)
 map('n', '<S-Tab>', vim.cmd.tabp)
@@ -26,8 +26,7 @@ map('i', '<C-k>', '<Up>')
 map('i', '<C-l>', '<Right>')
 -- }}}
 -- (v) quick mappings in visual mode {{{
-map('v', 'J', "<cmd>m '>+1<CR>gv=gv'")
-map('v', 'K', "<cmd>m '<-2<CR>gv=gv'")
+-- just in case
 -- }}}
 
 -- Copy/cut in sys clip {{{

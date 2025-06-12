@@ -11,6 +11,3 @@
 ### Wallpaper
     set $wallpaper "$HOME/Pictures/.wallpaper"
     set $lock_bg "$HOME/Pictures/.screensaver"
-
-### Set a defalut file for the quick open of the org-agenda
-    set $emacs_agenda "~/org/agenda/agenda.org"

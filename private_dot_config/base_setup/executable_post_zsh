@@ -4,10 +4,6 @@
 echo Installing chezmoi
 sh -c "$(curl -fsLS get.chezmoi.io)"
     
-# Make executables executable
-# for file in ~/.local/bin*; do chmod 755 "$file"; done
-# (Handled by chezmoi)
-
 # Add entry to .zshrc to load config
 echo '' >> ~/.zshrc
 echo '# Include zsh configuration' >> ~/.zshrc
@@ -18,52 +14,27 @@ echo '1: nvim'
 echo '2: emacs (standalone)'
 echo '3: emacsclient (requires "emacs.service" user service running)'
 
-editor=''
-while [ ! $editor ]; do
-    vared -p '> [1-3]: ' -c editor
-    case "$editor" in
-        1)
-            editor="\"nvim\""
-            ;;
-        2)
-            editor="\"emacs\""
-            ;;
-        3)
-            editor="\"emacsclient -a 'emacs'\""
-            ;;
-        *)
-            echo "Please select a valid value"
-            editor=''
-            ;;
-    esac
-done
-
-echo "export EDITOR=$editor" >> ~/.config/zsh/sh_variables
+echo "export EDITOR='nvim'" >> ~/.config/zsh/sh_variables
 
 # install needed packages
-sudo $PKG_CMD \
+sudo $PKG $INSTALL_CMD \
     sway \
+    nvim \
     foot \
-    kitty \
-    neovim \
     bemenu \
     swaylock \
     swayidle \
     swaybg \
-    grim \
-    wl-clipboard \
+    tmux \
     brightnessctl \
     zsh-autosuggestions \
     zsh-syntax-highlighting \
-    syncthing \
-    slurp \
-    wireguard \
-    ranger \
-    sxiv \
 
+# So nvim doesn't fart
+touch .config/nvim/lua/snippets.lua
 
 # Find another way to install fonts
 # ttf-nerd-fonts-symbols
 
 # Setting up catppuccin theme 
-zsh ~/.config/catppuccin_setup $CATPPUCCIN_FLAVOR
+~/.config/base_setup/catppuccin_setup

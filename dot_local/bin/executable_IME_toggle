@@ -1,7 +1,0 @@
-#!/bin/sh
-
-if [ "$(pidof wlanthy)" ]; then
-	kill $(pidof wlanthy);
-else
-	wlanthy &
-fi

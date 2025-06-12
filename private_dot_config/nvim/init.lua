@@ -1,7 +1,5 @@
+-- import whatever from the folder (in order)
 require("settings")
-
 require("lazy-conf")
-
 require("mappings")
-
 require("snippets")

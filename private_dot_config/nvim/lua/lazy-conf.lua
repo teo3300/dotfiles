@@ -1,5 +1,6 @@
 -- Bro, for the love of god, read the F-ing
 -- https://github.com/folke/lazy.nvim
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -40,7 +41,7 @@ require('lazy').setup({
         init = function()
             require('nvim-treesitter.configs').setup {
                 ensure_installed = {
-                    "c", "lua", "vim", "vimdoc", "query", "rust"
+                    "lua", "vim", "vimdoc"
                 },
                 sync_install = false,
                 auto_install = true,

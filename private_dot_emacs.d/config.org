@@ -23,7 +23,7 @@ Initialize built-in package manager and =use package=
 *** ensure
 #+begin_src emacs-lisp
   (require 'use-package-ensure)
-  (setq use-package-always-ensure t)
+  ;; (setq use-package-always-ensure t) ;; haha funny
 #+end_src
 
 * Bare minimum
@@ -126,8 +126,9 @@ Having just 3 priorities is really limiting
 * Style
 ** Catpuccin
 Just like this theme and I use it almost system-wide
-#+begin_src emacs-lisp
-  (use-package catppuccin-theme)
+#+begin_src emacs-lisp :tangle no
+  (use-package catppuccin-theme
+    :ensure t)
   (load-theme 'catppuccin :no-confirm)
 #+end_src
 
@@ -135,6 +136,7 @@ Just like this theme and I use it almost system-wide
 When I want the 80 columns constraint to be not only a soft one
 #+begin_src emacs-lisp
   (use-package olivetti
+    :ensure t
     :bind
     (:map global-map
       ("C-c o" . olivetti-mode))
@@ -148,18 +150,11 @@ When I want the 80 columns constraint to be not only a soft one
 #+end_src
 
 * Packages
-** vterm
-#+begin_src emacs-lisp
-  (use-package vterm  
-    :bind
-    (:map global-map
-          ("C-c v" . vterm)))
-#+end_src
-
 ** suggestions & completion
 *** company
 #+begin_src emacs-lisp
   (use-package company
+    :ensure t
     :hook
     (after-init . global-company-mode)
     :custom
@@ -184,11 +179,13 @@ When I want the 80 columns constraint to be not only a soft one
 *** YASnippet
 Useful snippets to avoid writing too much
 #+begin_src emacs-lisp
-  (use-package yasnippet-snippets)
+  (use-package yasnippet-snippets
+    :ensure t)
 #+end_src
 
 #+begin_src emacs-lisp
   (use-package yasnippet
+    :ensure t
     :after (yasnippet-snippets)
     :config
     (yas-reload-all)
@@ -239,23 +236,15 @@ Useful snippets to avoid writing too much
 
 *** flycheck
 #+begin_src emacs-lisp
-  (use-package flycheck )  
-#+end_src
-
-** treemacs
-Better file navigation
-#+begin_src emacs-lisp
-  (use-package treemacs
-    :bind
-    (:map global-map
-      ("C-c C-r" . treemacs)
-      ("C-c r" . treemacs-select-window)))
+  (use-package flycheck
+    :ensure t)
 #+end_src
 
 ** which-key
 I have a REALLY bad memory
 #+begin_src emacs-lisp
   (use-package which-key
+    :ensure t
     :config
     (which-key-mode))
 #+end_src
@@ -263,6 +252,7 @@ I have a REALLY bad memory
 Better search
 #+begin_src emacs-lisp
   (use-package vertico
+    :ensure t
     :init
     (vertico-mode))
 #+end_src
@@ -271,6 +261,7 @@ Better search
 =lsp-mode= for now only used to work with rust-analyzer
 #+begin_src emacs-lisp
   (use-package lsp-mode
+    :ensure nil
     :commands lsp
     :custom
 #+end_src
@@ -302,6 +293,7 @@ Better search
 Inline lsp overlay
 #+begin_src emacs-lisp
   (use-package lsp-ui
+    :ensure nil
     :commands lsp-ui-mode
     :custom
     (lsp-ui-peek-always-show t)
@@ -315,7 +307,7 @@ Inline lsp overlay
 extension of rust-mode, with some additional features
 #+begin_src emacs-lisp
   (use-package rustic
-    :ensure
+    :ensure nil
     :bind (:map rustic-mode-map
                 ("M-j" . lsp-ui-imenu)
                 ("M-?" . lsp-find-references)
@@ -346,6 +338,7 @@ extension of rust-mode, with some additional features
 ** org-roam
 #+begin_src emacs-lisp :tangle no
   (use-package org-roam
+    :ensure nil
     :config
     (setq org-roam-directory (file-truename "~/org/roam"))
     :bind
@@ -357,12 +350,14 @@ extension of rust-mode, with some additional features
 ** Modes
 *** rust-mode
 #+begin_src emacs-lisp
-  (use-package rust-mode )
+  (use-package rust-mode
+    :ensure nil)
 #+end_src
 
 *** markdown-mode
 #+begin_src emacs-lisp
   (use-package markdown-mode
+    :ensure t
     :config
     (add-to-list
       'auto-mode-alist

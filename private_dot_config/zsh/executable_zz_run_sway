@@ -1,7 +1,5 @@
 #!/bin/zsh
 if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-	
-    export PATH="$HOME/.local/bin:$PATH"
 
     DATE=$(date +"%Y-%m-%d_%H-%M-%S")
     echo "==$DATE" > "/tmp/sway.log"
@@ -9,6 +7,6 @@ if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
 
     source $HOME/.config/sway/startup_var
     exec sway \
-        > "/tmp/sway.log" \
-        2> "/tmp/sway.err"
+        >> "/tmp/sway.log" \
+        2>> "/tmp/sway.err"
 fi

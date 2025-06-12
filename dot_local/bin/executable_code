@@ -1,3 +1,0 @@
-#!/bin/zsh
-
-codium --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-webrtc-pipewire-capturer

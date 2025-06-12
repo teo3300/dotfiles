@@ -15,7 +15,6 @@
 
     ### Preferred terminal and file manager
     set $term foot
-    set $fm kitty -e ranger
 
     ### Default application launcher
     set $menu bemenu-run --ifne Wayland
@@ -40,10 +39,7 @@ include $HOME/.config/sway/config.d/*
     # # uncomment to actually move on top
     # position top
 
-        # mode hide
-
-        # COPR's i3status-rs does not properly show CPU usage
-        status_command $HOME/git/i3status-rust/target/release/i3status-rs
+        status_command i3status 
 
         # Colors from catpuccin
         colors {
@@ -67,7 +63,8 @@ include $HOME/.config/sway/config.d/*
     # Set keyboard layouts to cycle through
     input type:keyboard {
         # [fancy layout, still to decide] and standard US layout 
-        xkb_layout us(colemak_dh_iso),us
+        xkb_layout us
+        # For more info 'man 7 xkeyboard-config'
         # Set some keys
         #   CapsLock behave as Esc, Shift + CapsLock behave like CapsLock
         #   RightAlt compose key
@@ -84,4 +81,4 @@ include $HOME/.config/sway/config.d/*
         natural_scroll disabled
     }
 
-
+### }}}
