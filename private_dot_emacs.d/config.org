@@ -126,7 +126,7 @@ Having just 3 priorities is really limiting
 * Style
 ** Catpuccin
 Just like this theme and I use it almost system-wide
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
   (use-package catppuccin-theme
     :ensure t)
   (load-theme 'catppuccin :no-confirm)
@@ -261,7 +261,7 @@ Better search
 =lsp-mode= for now only used to work with rust-analyzer
 #+begin_src emacs-lisp
   (use-package lsp-mode
-    :ensure nil
+    :ensure t
     :commands lsp
     :custom
 #+end_src
@@ -293,7 +293,7 @@ Better search
 Inline lsp overlay
 #+begin_src emacs-lisp
   (use-package lsp-ui
-    :ensure nil
+    :ensure t
     :commands lsp-ui-mode
     :custom
     (lsp-ui-peek-always-show t)
@@ -307,7 +307,7 @@ Inline lsp overlay
 extension of rust-mode, with some additional features
 #+begin_src emacs-lisp
   (use-package rustic
-    :ensure nil
+    :ensure t
     :bind (:map rustic-mode-map
                 ("M-j" . lsp-ui-imenu)
                 ("M-?" . lsp-find-references)
@@ -351,7 +351,7 @@ extension of rust-mode, with some additional features
 *** rust-mode
 #+begin_src emacs-lisp
   (use-package rust-mode
-    :ensure nil)
+    :ensure t)
 #+end_src
 
 *** markdown-mode
