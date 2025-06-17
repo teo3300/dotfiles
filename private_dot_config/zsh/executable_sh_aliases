@@ -28,3 +28,7 @@ alias emacs="e"
 alias gs="git status"
 alias gu="git add -u"
 # }}}
+
+# Stuff
+alias python="python3"
+alias yt-dlp="yt-dlp --cookies ~/Downloads/cookies.txt"

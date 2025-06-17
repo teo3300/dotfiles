@@ -32,3 +32,18 @@ vim.g.mapleader = ' '
 
 -- attempt autoformatting on save using default LSP
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+
+-- Show diagnostic as virtual text on the right (red text)
+vim.diagnostic.config({
+    virtual_text = true
+})
+
+-- -- Alternatively
+-- --     https://stackoverflow.com/questions/69290794/nvim-lsp-change-lspconfig-diagnostic-message-location)
+-- vim.diagnostic.config({
+--     virtual_text = false
+-- })
+-- --
+-- -- Show line diagnostics automatically in hover window
+-- vim.o.updatetime = 250
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]

@@ -1,6 +1,9 @@
 #!/bin/zsh
 
+export RUSTC_WRAPPER="/opt/homebrew/bin/sccache"
+
 # Define any custom variable
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 # Funny path used by chezmoi
 export PATH="$HOME/bin:$PATH"

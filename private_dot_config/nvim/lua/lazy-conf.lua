@@ -41,7 +41,7 @@ require('lazy').setup({
         init = function()
             require('nvim-treesitter.configs').setup {
                 ensure_installed = {
-                    "lua", "vim", "vimdoc"
+                    "lua", "vim", "vimdoc", "latex"
                 },
                 sync_install = false,
                 auto_install = true,
@@ -99,11 +99,15 @@ require('lazy').setup({
             -- leave to mason the burden to manage language servers
             require('mason').setup({})
             require('mason-lspconfig').setup({
-                ensure_installed = { 'rust_analyzer', 'lua_ls' },
+                ensure_installed = { 'rust_analyzer', 'lua_ls', 'texlab' },
                 -- Language server configuration
                 -- https://lsp-zero.netlify.app/v3.x/guide/integrate-with-mason-nvim.html#configure-a-language-server
                 handlers = {
                     lsp_zero.default_setup,
+                    texlab = function()
+                        require('lspconfig').texlab.setup({
+                        })
+                    end,
                     lua_ls = function()
                         require('lspconfig').lua_ls.setup({
                             settings = {

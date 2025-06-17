@@ -261,7 +261,7 @@ Better search
 =lsp-mode= for now only used to work with rust-analyzer
 #+begin_src emacs-lisp
   (use-package lsp-mode
-    :ensure t
+    :ensure nil
     :commands lsp
     :custom
 #+end_src
@@ -293,7 +293,7 @@ Better search
 Inline lsp overlay
 #+begin_src emacs-lisp
   (use-package lsp-ui
-    :ensure t
+    :ensure nil
     :commands lsp-ui-mode
     :custom
     (lsp-ui-peek-always-show t)
@@ -307,7 +307,7 @@ Inline lsp overlay
 extension of rust-mode, with some additional features
 #+begin_src emacs-lisp
   (use-package rustic
-    :ensure t
+    :ensure nil
     :bind (:map rustic-mode-map
                 ("M-j" . lsp-ui-imenu)
                 ("M-?" . lsp-find-references)
@@ -351,7 +351,7 @@ extension of rust-mode, with some additional features
 *** rust-mode
 #+begin_src emacs-lisp
   (use-package rust-mode
-    :ensure t)
+    :ensure nil)
 #+end_src
 
 *** markdown-mode
