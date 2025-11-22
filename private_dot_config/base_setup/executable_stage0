@@ -28,10 +28,10 @@ if ! which zsh &>/dev/null; then
     sudo $PKG $INSTALL_CMD zsh
     chsh -s $(which zsh)
     echo "Please run '.condfig/base_setup/stage0' again"
+
+    echo "Installing oh-my-zsh"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     exit 1
 fi
-
-echo "Installing oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 zsh ~/.config/base_setup/post_zsh

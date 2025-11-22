@@ -66,10 +66,10 @@ include $HOME/.config/sway/config.d/*
         xkb_layout us
         # For more info 'man 7 xkeyboard-config'
         # Set some keys
-        #   CapsLock behave as Esc, Shift + CapsLock behave like CapsLock
+        #   CapsLock behave as Ctrl, Shift + CapsLock behave like CapsLock
         #   RightAlt compose key
         #   LeftShift + RightShift cycle throught layouts
-        xkb_options caps:escape_shifted_capslock,compose:ralt,grp:shifts_toggle
+        xkb_options caps:ctrl_shifted_capslock,compose:ralt,grp:shifts_toggle
     }
 
     input type:touchpad {

@@ -1,31 +1,50 @@
 #!/usr/bin/zsh
 
+set -e
+
 # Installing chezmoi to push local changes
-echo Installing chezmoi
-sh -c "$(curl -fsLS get.chezmoi.io)"
-    
-# Add entry to .zshrc to load config
-echo '' >> ~/.zshrc
-echo '# Include zsh configuration' >> ~/.zshrc
-echo 'for file in ~/.config/zsh/*; do source "$file"; done' >> ~/.zshrc
+if [[ ! $(chezmoi --version) ]]; then
+    echo Installing chezmoi
+    sh -c "$(curl -fsLS get.chezmoi.io)"
+fi
 
-echo 'Select the default editor to use in this machine:'
-echo '1: nvim'
-echo '2: emacs (standalone)'
-echo '3: emacsclient (requires "emacs.service" user service running)'
+if [[ ! $(grep '#load_dot_conf_zsh' ~/.zshrc) ]]; then
+    # Add entry to .zshrc to load config
+    echo 'Include ~/.config/zsh/* in .zshrc' 
+    echo '' >> ~/.zshrc
+    echo '# Include zsh configuration: #load_dot_conf_zsh' >> ~/.zshrc
+    echo 'for file in ~/.config/zsh/*; do source "$file"; done' >> ~/.zshrc
+fi
 
-echo "export EDITOR='nvim'" >> ~/.config/zsh/sh_variables
+grep -e '^export EDITOR=' ~/.config/zsh/sh_variables > /dev/null ||\
+    echo 'export EDITOR=nvim' >> ~/.config/zsh/sh_variables
 
+if [[ (-z $PKG) || (-z $INSTALL_CMD) ]] exit 1
+
+echo 'Using sudo to install packages'
+
+echo 'Installing sway and related'
 # install needed packages
 sudo $PKG $INSTALL_CMD \
     sway \
-    nvim \
-    foot \
-    bemenu \
     swaylock \
     swayidle \
     swaybg \
+    i3status \
+    bemenu
+
+echo 'Installing tool for screenshot scripting'
+sudo $PKG $INSTALL_CMD \
+    grim \
+    slurp \
+    wl-clipboard \
+
+echo 'Installing additional programs'
+sudo $PKG $INSTALL_CMD \
+    nvim \
+    foot \
     tmux \
+    pamixer \
     brightnessctl \
     zsh-autosuggestions \
     zsh-syntax-highlighting \

@@ -34,6 +34,6 @@ install_and_link \
 
 # foot .config/foot/palette
 install_and_link \
-    "https://raw.githubusercontent.com/catppuccin/foot/main/catppuccin-$THEME.ini" \
+    "https://raw.githubusercontent.com/catppuccin/foot/refs/heads/main/themes/catppuccin-$THEME.ini" \
     $HOME/.config/foot/palette \
     foot

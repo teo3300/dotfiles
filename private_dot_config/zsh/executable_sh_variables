@@ -17,3 +17,5 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # default editor and pager
 export PAGER=less
 export EDITOR=nvim
+
+export MAKEFLAGS="-j$(nproc)"

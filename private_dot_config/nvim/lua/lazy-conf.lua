@@ -16,8 +16,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
     { 'tpope/vim-fugitive' },
+    { 'gerazov/toggle-bool.nvim' },
     { 'mbbill/undotree' },
-    { 'ThePrimeagen/harpoon', dependencies = { 'nvim-lua/plenary.nvim' } },
+    { 'ThePrimeagen/harpoon',    dependencies = { 'nvim-lua/plenary.nvim' } },
     -- Telescope {{{
     {
         'nvim-telescope/telescope.nvim',
@@ -41,7 +42,7 @@ require('lazy').setup({
         init = function()
             require('nvim-treesitter.configs').setup {
                 ensure_installed = {
-                    "lua", "vim", "vimdoc", "latex"
+                    "lua", "vim", "vimdoc",
                 },
                 sync_install = false,
                 auto_install = true,
@@ -56,13 +57,11 @@ require('lazy').setup({
     -- LSP {{{
     {
         -- package {{{
-        'neovim/nvim-lspconfig',
+        'williamboman/mason-lspconfig.nvim',
         dependencies = {
             -- Uncomment the two plugins below if you want to manage the
             -- language servers from neovim
             'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
-
             'neovim/nvim-lspconfig',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/nvim-cmp',

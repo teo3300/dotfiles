@@ -6,7 +6,7 @@ alias ls='ls --color=auto'
 alias ll='ls -al'
 
 # save my ass
-alias rm='echo command \"rm\" has been disabled on this machine, use \"trash\" or call rm by full path \"/usr/bin/rm\"'
+alias rm='echo "use \"trash\" or \"/usr/bin/rm\""'
 
 # all t-s go to tmux
 alias t="tmux a"
