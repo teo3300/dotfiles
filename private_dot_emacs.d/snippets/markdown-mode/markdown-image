@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: markdown image
-# key: [[
-# --
-![${1:Alternative}](${2:link})$0

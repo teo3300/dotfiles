@@ -30,9 +30,10 @@ include $HOME/.config/sway/config.d/*
     output "*" bg $wallpaper fill
 
     ### After <lock_timer> lock the screen, after another <black_screen_display> turn the screen off
-    exec swayidle -w \
+    exec always killall swayidle; swayidle -w \
         timeout $lock_timer $lock\
         timeout $(expr $lock_timer + $black_screen_delay) 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+        timeout $(expr $lock_timer + $black_screen_delay + $suspend_delay) $suspend\
         before-sleep $lock
 
     bar {

@@ -5,8 +5,9 @@
     set $brightness_step 4
 
 ### Swaylock timeout
-    set $lock_timer 300
-    set $black_screen_delay 60
+    set $lock_timer 120
+    set $black_screen_delay 30
+    set $suspend_delay 30
 
 ### Wallpaper
     set $wallpaper "$HOME/Pictures/.wallpaper"

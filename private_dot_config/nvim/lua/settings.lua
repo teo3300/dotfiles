@@ -13,7 +13,7 @@ set.smarttab = true
 
 -- line numbering
 set.number = true
-set.relativenumber = true
+set.relativenumber = false
 
 -- long undo instead of swapfile
 set.swapfile = false
