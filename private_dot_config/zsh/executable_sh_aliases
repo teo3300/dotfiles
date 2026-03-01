@@ -8,27 +8,8 @@ alias ll='ls -al'
 # save my ass
 alias rm='echo "use \"trash\" or \"/usr/bin/rm\""'
 
-# all t-s go to tmux
-alias t="tmux a"
-alias T="tmux"
+# I will never type nvim
+alias vim='nvim'
 
-# all v-s go to the nvim
-alias v='nvim'
-alias vi='v'
-alias vim='v'
-alias V="v ."
-
-# and all e-s go to the emacs
-alias e="emacs"
-alias em="e"
-alias emacs="e"
-
-# git stuff {{{
-# gs is normally for ghostscript...
-alias gs="git status"
-alias gu="git add -u"
-# }}}
-
-# Stuff
+# Python's brainfart
 alias python="python3"
-alias yt-dlp="yt-dlp --cookies ~/Downloads/cookies.txt"
