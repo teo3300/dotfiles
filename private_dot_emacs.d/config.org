@@ -11,52 +11,43 @@ Initialize built-in package manager and =use package=
 ** Initialize MELPA
 #+begin_src emacs-lisp
   (add-to-list
-    'package-archives '("melpa" . "https://melpa.org/packages/") t)
+    'package-archives '("melpa" . "https://melpa.org/packages/"))
 #+end_src
 
 ** use-package
-*** use-package
+use-package and use-package-ensure
 #+begin_src emacs-lisp
   (eval-when-compile
     (require 'use-package))
-#+end_src
-*** ensure
-#+begin_src emacs-lisp
   (require 'use-package-ensure)
-  ;; (setq use-package-always-ensure t) ;; haha funny
 #+end_src
 
 * Bare minimum
 ** [[https://github.com/emacs-evil/evil][Evil]] mode
 Install and enable evil mode and use undo-tree
-(I REFUSE to use emacs without vim keybindings)
 #+begin_src emacs-lisp
-(use-package undo-tree
-  :ensure t
-  :config
-  (global-undo-tree-mode))
+  (use-package undo-tree
+    :ensure t
+    :config
+    (global-undo-tree-mode))
 
-(use-package evil
-  :ensure t
-  ;:demand t
-  :config
-  (evil-mode 1)
-  (evil-set-undo-system 'undo-tree))
+  (use-package evil
+    :ensure t
+    :config
+    (evil-mode 1)
+    (evil-set-undo-system 'undo-tree))
 #+end_src
 
 ** Line numbering
-I use relative line numbers since they are much easier to work with
-when doing copy-paste in evil-mode
 #+begin_src emacs-lisp
-  (setq display-line-numbers-type 'relative) 
   (global-display-line-numbers-mode)
 #+end_src
 
-** Column 80 ruler                                                   :Broken:
+** Column 80 ruler
 Use this as a soft boundary for when writing code
-#+begin_src emacs-lisp :tangle no
-  (global-display-fill-column-indicator-mode)
+#+begin_src emacs-lisp
   (setq display-fill-column-indicator-column 80)
+  (global-display-fill-column-indicator-mode)
 #+end_src
 
 ** Global keybindings
@@ -68,80 +59,48 @@ Quick open emacs config file
     (interactive)
     (find-file "~/.emacs.d/config.org"))
 #+end_src
+
 open =config.org= (this file) whith =C-c c=
 
 #+begin_src emacs-lisp
-  (define-key global-map (kbd "C-c c") 'org-config)
+  (keymap-global-set "C-c c" 'org-config)
 #+end_src
 
 *** Better resize keys 
 #+begin_src emacs-lisp
-  (global-set-key (kbd "S-C-<left>")
-                  'shrink-window-horizontally)
-  (global-set-key (kbd "S-C-<right>")
-                  'enlarge-window-horizontally)
-  (global-set-key (kbd "S-C-<down>")
-                  'shrink-window)
-  (global-set-key (kbd "S-C-<up>")
-                  'enlarge-window)
+  (keymap-global-set "C-S-<left>"  'shrink-window-horizontally)
+  (keymap-global-set "C-S-<right>" 'enlarge-window-horizontally)
+  (keymap-global-set "C-S-<down>"  'shrink-window)
+  (keymap-global-set "C-S-<up>"    'enlarge-window)
 #+end_src
 
-** org agenda
-*** Add custom location to the agenda files
+** Org agenda
+Quick open agenda main file and agenda-view menu
+#+begin_src emacs-lisp
+  (keymap-global-set "C-c a" 'org-agenda)
+  (keymap-global-set "C-c s" (find-file "~/org/agenda/index.org"))
+#+end_src
+
 #+begin_src emacs-lisp
   (setq org-agenda-files '("~/org/agenda"))
 #+end_src
 
-*** keybinding
-**** quick open agenda-view menu
+Agenda directory missing results in errors then I will ensure the
+directory exists
 #+begin_src emacs-lisp
-  (define-key global-map (kbd "C-c a") 'org-agenda)
+  (let ((agenda-file (car org-agenda-files)))
+    (if (not (file-exists-p agenda-file))
+             (make-directory agenda-file)))
 #+end_src
 
-**** quick open org-agenda main file
-Quick open agenda main file and agenda-view menu
-#+begin_src emacs-lisp
-  (define-key global-map (kbd "C-c s")
-    (find-file "~/org/agenda/index.org"))
-#+end_src
-
-*** Custom todo list
-#+begin_src emacs-lisp
-  (setq org-todo-keywords
-    '((sequence
-        "TODO(t)" "PROJ(p)" "IDEA(i)" "READ(r)"
-        "|" "DONE(d)" "KILL(k)") ; standard
-      (sequence
-        "[ ](T)" "[-](S)" "[?](W)"
-        "|" "[X](D)")
-      (sequence
-        "CHCK(c)"
-        "|" "YES(y)" "NO(n)")))
-#+end_src
-*** Use priorities A-E
-Having just 3 priorities is really limiting
-#+begin_src emacs-lisp
-  (setq org-lowest-priority ?E)
-#+end_src
 * Style
 ** Catpuccin
 Just like this theme and I use it almost system-wide
 #+begin_src emacs-lisp
   (use-package catppuccin-theme
     :ensure t)
+  (setq catpuccin-flavor 'mocha)
   (load-theme 'catppuccin :no-confirm)
-#+end_src
-
-** olivetti
-When I want the 80 columns constraint to be not only a soft one
-#+begin_src emacs-lisp
-  (use-package olivetti
-    :ensure t
-    :bind
-    (:map global-map
-      ("C-c o" . olivetti-mode))
-    :config
-    (setq olivetti-body-width 80))
 #+end_src
 
 ** Use spaces for indentation
@@ -170,10 +129,7 @@ When I want the 80 columns constraint to be not only a soft one
           ("C-n". company-select-next)
           ("C-p". company-select-previous)
           ("M-<". company-select-first)
-          ("M->". company-select-last))
-    (:map company-mode-map
-          ("<tab>". tab-indent-or-complete)
-	  ("TAB". tab-indent-or-complete)))
+          ("M->". company-select-last)))
 #+end_src
 
 *** YASnippet
@@ -196,36 +152,6 @@ Useful snippets to avoid writing too much
     :hook
     (prog-mode-hook . yas-minor-mode)
     (text-mode-hook . yas-minor-mode)) 
-#+end_src
-
-*** Weird set of company-yas integration function
-#+begin_src emacs-lisp
-  (defun company-yasnippet-or-completion ()
-    (interactive)
-    (or (do-yas-expand)
-        (company-complete-common)))
-  
-  (defun check-expansion ()
-    (save-excursion
-      (if (looking-at "\\_>") t
-        (backward-char 1)
-        (if (looking-at "\\.") t
-          (backward-char 1)
-          (if (looking-at "::") t nil)))))
-  
-  (defun do-yas-expand ()
-    (let ((yas/fallback-behavior 'return-nil))
-      (yas/expand)))
-  
-  (defun tab-indent-or-complete ()
-    (interactive)
-    (if (minibufferp)
-        (minibuffer-complete)
-      (if (or (not yas-minor-mode)
-              (null (do-yas-expand)))
-          (if (check-expansion)
-              (company-complete-common)
-            (indent-for-tab-command)))))  
 #+end_src
 
 *** flyspell
@@ -258,7 +184,6 @@ Better search
 #+end_src
 
 ** lsp-mode
-=lsp-mode= for now only used to work with rust-analyzer
 #+begin_src emacs-lisp :tangle no
   (use-package lsp-mode
     :ensure nil
@@ -301,52 +226,6 @@ Inline lsp overlay
     (lsp-ui-doc-enable nil))
 #+end_src
 
-** language-specific
-*** rust
-**** rustic
-extension of rust-mode, with some additional features
-#+begin_src emacs-lisp :tangle no
-  (use-package rustic
-    :ensure nil
-    :bind (:map rustic-mode-map
-                ("M-j" . lsp-ui-imenu)
-                ("M-?" . lsp-find-references)
-                ("C-c C-c l" . flycheck-list-errors)
-                ("C-c C-c a" . lsp-execute-code-action)
-                ("C-c C-c r" . lsp-rename)
-                ("C-c C-c q" . lsp-workspace-restart)
-                ("C-c C-c Q" . lsp-workspace-shutdown)
-                ("C-c C-c s" . lsp-rust-analyzer-status))
-    :hook
-    (rustic-mode-hook . rk/rustic-mode-hook))
-
-  ;; comment to disable rustfmt on save
-  (setq rustic-format-on-save t)
-#+end_src
-
-#+begin_src emacs-lisp
-  (defun rk/rustic-mode-hook ()
-    ;; so that run C-c C-c C-r works without having to confirm, but don't try to
-    ;; save rust buffers that are not file visiting. Once
-    ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
-    ;; no longer be necessary.
-    (when buffer-file-name
-      (setq-local buffer-save-without-query t))
-    (add-hook 'before-save-hook 'lsp-format-buffer nil t))
-#+end_src
-
-** org-roam
-#+begin_src emacs-lisp :tangle no
-  (use-package org-roam
-    :ensure nil
-    :config
-    (setq org-roam-directory (file-truename "~/org/roam"))
-    :bind
-    (:map global-map
-      ("C-c n f" . org-roam-node-find)
-      ("C-c n i" . org-roam-node-insert)))
-#+end_src
-
 ** Modes
 *** rust-mode
 #+begin_src emacs-lisp :tangle no
@@ -362,18 +241,4 @@ extension of rust-mode, with some additional features
     (add-to-list
       'auto-mode-alist
       '("\\.md\\'" . markdown-mode)))
-#+end_src
-
-* Org - LaTeX export
-
-Eval all buffer in the file
-#+begin_src emacs-lisp :tangle no
-  (defun run-src-blocks-before-export ()
-    "Execute src blocks in the file before exporting LaTeX."
-    (org-babel-execute-buffer))
-#+end_src
-
-Execute the specified function before the export process
-#+begin_src emacs-lisp :tangle no
-(add-hook 'org-export-before-processing-functions 'run-src-blocks-before-export)
 #+end_src
