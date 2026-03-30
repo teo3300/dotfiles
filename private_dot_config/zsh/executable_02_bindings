@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+# Add any useful keybinding
+#
+# bindkey -s '<key>' "<command>"
+
+# tmux-sessionizer on C-T
+bindkey -s '' " tmux-sessionizer"

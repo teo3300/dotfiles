@@ -1,8 +1,0 @@
-#!/bin/zsh
-
-# Add any useful keybinding
-
-## eg:
-## bindkey -s '^F' "find . -name "
-bindkey -s '' "fzf | xargs nvim"
-bindkey -s '' "tmux a || tmux"

@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+# Aliases for zsh
+# listing aliases
+alias ls='ls --color=auto'
+alias ll='ls -al'
+
+# save my ass
+alias rm='echo command \"rm\" has been disabled on this machine, use \"trash\" or call rm by full path \"/usr/bin/rm\"'
+
+# all v-s go to the nvim
+alias vim='nvim'
+
+# Stuff
+alias python="python3"
